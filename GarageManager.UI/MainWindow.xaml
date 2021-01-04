@@ -3,10 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:GarageManager.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="600" MinWidth="1080" WindowStartupLocation="CenterScreen" WindowState="Maximized" FontFamily="Roboto">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Background="#FF363636">
+            <Grid Height="150" Background="Gray"/>
+            <ListView>
+                <ListViewItem>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ViewDashboard" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="BoxVariant" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Products" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="User" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Users" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Settings" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+        </StackPanel>
+
 
     </Grid>
 </Window>
