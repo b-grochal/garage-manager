@@ -1,4 +1,5 @@
-﻿using GarageManager.UI.ViewModels;
+﻿using GarageManager.UI.Infrastructure;
+using GarageManager.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -20,7 +21,7 @@ namespace GarageManager.UI.HostBuilders
                 //services.AddSingleton<AssetSummaryViewModel>();
                 //services.AddSingleton<MainViewModel>();
 
-                //services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
+                services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 //services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services => () => services.GetRequiredService<PortfolioViewModel>());
                 //services.AddSingleton<CreateViewModel<BuyViewModel>>(services => () => services.GetRequiredService<BuyViewModel>());
                 //services.AddSingleton<CreateViewModel<SellViewModel>>(services => () => services.GetRequiredService<SellViewModel>());

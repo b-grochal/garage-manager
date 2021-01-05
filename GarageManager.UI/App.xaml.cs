@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GarageManager.UI.HostBuilders;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,13 @@ namespace GarageManager.UI
 
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
-            return Host.CreateDefaultBuilder(args);
-                //.AddConfiguration()
-                //.AddFinanceAPI()
-                //.AddDbContext()
-                //.AddServices()
-                //.AddStores()
-                //.AddViewModels()
-                //.AddViews();
+            return Host.CreateDefaultBuilder(args)
+                .AddConfiguration()
+                .AddDbContext()
+                .AddServices()
+                .AddStores()
+                .AddViewModels()
+                .AddViews();
         }
 
         protected override void OnStartup(StartupEventArgs e)

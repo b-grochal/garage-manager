@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GarageManager.UI.ViewModels
+namespace GarageManager.UI.Infrastructure
 {
-    public class HomeViewModel : BaseViewModel
+    public enum ViewType
     {
+        Home
     }
 }
