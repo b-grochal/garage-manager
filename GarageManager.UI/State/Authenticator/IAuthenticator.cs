@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GarageManager.UI.State.Authenticator
 {
-    interface IAuthenticator
+    public interface IAuthenticator
     {
     }
 }
