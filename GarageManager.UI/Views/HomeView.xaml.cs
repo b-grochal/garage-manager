@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GarageManager.UI.Views.Auth
+namespace GarageManager.UI.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for HomeView.xaml
     /// </summary>
-    public partial class LoginView : Page
+    public partial class HomeView : UserControl
     {
-        public LoginView()
+        public HomeView()
         {
             InitializeComponent();
         }
