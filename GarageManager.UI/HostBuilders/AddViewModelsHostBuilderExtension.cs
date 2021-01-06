@@ -19,7 +19,7 @@ namespace GarageManager.UI.HostBuilders
                 //services.AddSingleton<BuyViewModel>();
                 //services.AddSingleton<SellViewModel>();
                 //services.AddSingleton<AssetSummaryViewModel>();
-                //services.AddSingleton<MainViewModel>();
+                services.AddSingleton<MainViewModel>();
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 //services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services => () => services.GetRequiredService<PortfolioViewModel>());
@@ -28,7 +28,7 @@ namespace GarageManager.UI.HostBuilders
                 //services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
                 //services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
-                //services.AddSingleton<ISimpleTraderViewModelFactory, SimpleTraderViewModelFactory>();
+                services.AddSingleton<IViewModelFactory, ViewModelFactory>();
 
                 //services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
                 //services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();

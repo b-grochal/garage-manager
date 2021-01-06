@@ -15,15 +15,26 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Background="{StaticResource PrimaryBlackBrush}">
-            <Grid Height="150">
-                <TextBlock Foreground="{StaticResource PrimarySilverBrush}" FontSize="24" Text="Garage Manager" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-            </Grid>
-            <StackPanel>
-                <RadioButton Content="Home" />
+        <Grid Grid.Column="0">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLoggedIn}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <StackPanel Background="{StaticResource PrimaryBlackBrush}">
+                <Grid Height="150">
+                    <TextBlock Foreground="{StaticResource PrimarySilverBrush}" FontSize="24" Text="Garage Manager" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                </Grid>
+                <StackPanel>
+                    <RadioButton Content="Home" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-
+        </Grid>
+        
         <ScrollViewer Grid.Column="1">
             <ContentControl Content="{Binding CurrentViewModel}"/>
         </ScrollViewer>

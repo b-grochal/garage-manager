@@ -8,20 +8,38 @@ namespace GarageManager.UI.State.Authenticator
 {
     public class Authenticator : IAuthenticator
     {
-        public User LoggedUser => throw new NotImplementedException();
+        private User _loggedUser;
+        public User LoggedUser
+        {
+            get
+            {
+                return this._loggedUser;
+            }
+            set
+            {
+                this._loggedUser = value;
+                StateChanged?.Invoke();
+            }
+        }
 
-        public bool IsLoggedIn => throw new NotImplementedException();
+        public bool IsLoggedIn => LoggedUser != null;
 
         public event Action StateChanged;
 
         public Task Login(string login, string password)
         {
-            throw new NotImplementedException();
+            LoggedUser = new User
+            {
+                UserId = 1,
+                UserName = "Jack",
+                PasswordHash = "hdkasjskjc385qncauey8q4"
+            };
+            return null;
         }
 
         public void Logout()
         {
-            throw new NotImplementedException();
+            LoggedUser = null;
         }
     }
 }
