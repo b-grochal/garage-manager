@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GarageManager.UI"
              xmlns:views="clr-namespace:GarageManager.UI.Views"
-             xmlns:viewmodels="clr-namespace:GarageManager.UI.ViewModels"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewmodels="clr-namespace:GarageManager.UI.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="PrimaryRed">#E94B3C</Color>
