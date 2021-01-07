@@ -41,10 +41,8 @@ namespace GarageManager.UI
             _host.Start();
 
             //SimpleTraderDbContextFactory contextFactory = _host.Services.GetRequiredService<SimpleTraderDbContextFactory>();
-            using (GarageManagerDbContext context = _host.Services.GetRequiredService<GarageManagerDbContext>())
-            {
-                context.Database.EnsureCreated();
-            }
+            GarageManagerDbContext context = _host.Services.GetRequiredService<GarageManagerDbContext>();
+            context.Database.EnsureCreated();
 
             Window window = _host.Services.GetRequiredService<MainWindow>();
             window.Show();
