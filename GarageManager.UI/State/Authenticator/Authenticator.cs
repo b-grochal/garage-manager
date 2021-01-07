@@ -26,15 +26,9 @@ namespace GarageManager.UI.State.Authenticator
 
         public event Action StateChanged;
 
-        public Task Login(string login, string password)
+        public void Login(User user)
         {
-            LoggedUser = new User
-            {
-                UserId = 1,
-                UserName = "Jack",
-                PasswordHash = "hdkasjskjc385qncauey8q4"
-            };
-            return null;
+            LoggedUser = user; 
         }
 
         public void Logout()

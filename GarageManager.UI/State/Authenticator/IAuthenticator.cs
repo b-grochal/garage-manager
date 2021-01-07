@@ -13,7 +13,7 @@ namespace GarageManager.UI.State.Authenticator
 
         event Action StateChanged;
 
-        Task Login(string login, string password);
+        void Login(User user);
 
         void Logout();
     }
