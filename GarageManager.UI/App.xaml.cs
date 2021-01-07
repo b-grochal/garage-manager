@@ -1,4 +1,6 @@
-﻿using GarageManager.UI.HostBuilders;
+﻿using GarageManager.Data.Context;
+using GarageManager.UI.HostBuilders;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -39,10 +41,10 @@ namespace GarageManager.UI
             _host.Start();
 
             //SimpleTraderDbContextFactory contextFactory = _host.Services.GetRequiredService<SimpleTraderDbContextFactory>();
-            //using (SimpleTraderDbContext context = contextFactory.CreateDbContext())
-            //{
-            //    context.Database.Migrate();
-            //}
+            using (GarageManagerDbContext context = _host.Services.GetRequiredService<GarageManagerDbContext>())
+            {
+                context.Database.EnsureCreated();
+            }
 
             Window window = _host.Services.GetRequiredService<MainWindow>();
             window.Show();
