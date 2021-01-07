@@ -25,7 +25,7 @@ namespace GarageManager.UI.ViewModels
             _navigator.StateChanged += Navigator_StateChanged;
             _authenticator.StateChanged += Authenticator_StateChanged;
 
-            _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(ViewType.Home);
+            _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(ViewType.Login);
         }
 
         private void Authenticator_StateChanged()
