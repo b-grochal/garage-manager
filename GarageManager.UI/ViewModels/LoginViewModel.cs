@@ -14,7 +14,6 @@ namespace GarageManager.UI.ViewModels
     {
         private string _userName;
         private string _password;
-        public ICommand loginCommand;
 
         public string UserName
         {
@@ -42,6 +41,8 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        public ICommand LoginCommand { get; }
+
         public MessageViewModel ErrorMessageViewModel { get; }
 
         public string ErrorMessage
@@ -51,7 +52,7 @@ namespace GarageManager.UI.ViewModels
 
         public LoginViewModel(IAuthService authService, IAuthenticator authenticator, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            this.loginCommand = new LoginCommand(this, authService, authenticator, navigator, viewModelFactory);
+            this.LoginCommand = new LoginCommand(this, authService, authenticator, navigator, viewModelFactory);
             this.ErrorMessageViewModel = new MessageViewModel();
         }
     }

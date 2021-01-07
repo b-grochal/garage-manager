@@ -1,4 +1,5 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Data.Seeder;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,12 @@ namespace GarageManager.Data.Context
         public DbSet<Car> Cars { get; set; }
         public DbSet<Service> Services { get; set; }
         public GarageManagerDbContext(DbContextOptions options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
+
 
     }
 }

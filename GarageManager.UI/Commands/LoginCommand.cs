@@ -47,7 +47,7 @@ namespace GarageManager.UI.Commands
             //{
             //    _loginViewModel.ErrorMessage = "Incorrect password.";
             //}
-            catch (Exception)
+            catch (Exception e)
             {
                 _loginViewModel.ErrorMessage = "Login failed.";
             }
