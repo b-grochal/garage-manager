@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GarageManager.Data\GarageManager.Data.csproj" />
+    <ProjectReference Include="..\GarageManager.Services\GarageManager.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

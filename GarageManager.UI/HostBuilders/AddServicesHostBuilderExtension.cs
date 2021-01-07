@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Implementation;
+using GarageManager.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,9 +16,8 @@ namespace GarageManager.UI.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                //services.AddSingleton<IPasswordHasher, PasswordHasher>();
-
-                //services.AddSingleton<IAuthenticationService, AuthenticationService>();
+                services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
+                services.AddSingleton<IAuthService, AuthService>();
                 //services.AddSingleton<IDataService<Account>, AccountDataService>();
                 //services.AddSingleton<IAccountService, AccountDataService>();
                 //services.AddSingleton<IStockPriceService, StockPriceService>();
