@@ -18,6 +18,7 @@ namespace GarageManager.UI.HostBuilders
             {
                 services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
                 services.AddSingleton<IAuthService, AuthService>();
+                services.AddSingleton<IUsersService, UsersService>();
                 //services.AddSingleton<IDataService<Account>, AccountDataService>();
                 //services.AddSingleton<IAccountService, AccountDataService>();
                 //services.AddSingleton<IStockPriceService, StockPriceService>();
