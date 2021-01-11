@@ -19,6 +19,10 @@
                 <views:LoginView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:UsersListViewModel}">
+                <views:UsersListView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
