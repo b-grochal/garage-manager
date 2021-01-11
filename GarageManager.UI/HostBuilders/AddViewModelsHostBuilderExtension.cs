@@ -1,4 +1,7 @@
-﻿using GarageManager.UI.Infrastructure;
+﻿using GarageManager.Services.Interfaces;
+using GarageManager.UI.Infrastructure;
+using GarageManager.UI.State.Authenticator;
+using GarageManager.UI.State.Navigator;
 using GarageManager.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,7 +19,7 @@ namespace GarageManager.UI.HostBuilders
             {
                 //services.AddSingleton(CreateHomeViewModel);
                 services.AddSingleton<HomeViewModel>();
-                services.AddSingleton<LoginViewModel>();
+                //services.AddSingleton<LoginViewModel>();
                 //services.AddSingleton<BuyViewModel>();
                 //services.AddSingleton<SellViewModel>();
                 //services.AddSingleton<AssetSummaryViewModel>();
@@ -26,7 +29,8 @@ namespace GarageManager.UI.HostBuilders
                 //services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services => () => services.GetRequiredService<PortfolioViewModel>());
                 //services.AddSingleton<CreateViewModel<BuyViewModel>>(services => () => services.GetRequiredService<BuyViewModel>());
                 //services.AddSingleton<CreateViewModel<SellViewModel>>(services => () => services.GetRequiredService<SellViewModel>());
-                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => services.GetRequiredService<LoginViewModel>());
+                services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
+                services.AddSingleton<CreateViewModel<UsersListViewModel>>(services => () => CreatedUsersListViewModel(services));
                 //services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
@@ -37,6 +41,23 @@ namespace GarageManager.UI.HostBuilders
             });
 
             return host;
+        }
+
+        private static LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
+        {
+            return new LoginViewModel(
+                serviceProvider.GetRequiredService<IAuthService>(),
+                serviceProvider.GetRequiredService<IAuthenticator>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static UsersListViewModel CreatedUsersListViewModel(IServiceProvider serviceProvider)
+        {
+            return new UsersListViewModel(
+                serviceProvider.GetRequiredService<IUsersService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
         }
     }
 }
