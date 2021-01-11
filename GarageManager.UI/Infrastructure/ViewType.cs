@@ -7,6 +7,7 @@ namespace GarageManager.UI.Infrastructure
     public enum ViewType
     {
         Home,
-        Login
+        Login,
+        UsersList
     }
 }

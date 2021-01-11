@@ -37,6 +37,9 @@
                     <RadioButton Content="Home" 
                                  Command="{Binding ShowHomePageCommand}"
                                  IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:HomeViewModel}}"/>
+                    <RadioButton Content="Home" 
+                                 Command="{Binding ShowUsersListCommand}"
+                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:UsersListViewModel}}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

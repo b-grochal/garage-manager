@@ -6,5 +6,6 @@ namespace GarageManager.UI.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+    
     }
 }
