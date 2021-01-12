@@ -1,9 +1,11 @@
 ﻿using GarageManager.Data.Context;
 using GarageManager.Data.Entities;
 using GarageManager.Services.Interfaces;
+using GarageManager.Services.SearchCriteria;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +34,18 @@ namespace GarageManager.Services.Implementation
         {
             return await _garageManagerDbContext.Users
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetUsers(UsersListSearchCriteria usersListSearchCriteria)
+        {
+            var queryable = _garageManagerDbContext.Users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(usersListSearchCriteria.Login))
+            {
+                queryable = queryable.Where(u => u.UserName.Contains(usersListSearchCriteria.Login));
+            }
+
+            return await queryable.ToListAsync();
         }
     }
 }

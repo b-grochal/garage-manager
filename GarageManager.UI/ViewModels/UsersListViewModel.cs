@@ -1,12 +1,14 @@
 ﻿using GarageManager.Data.Entities;
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
+using GarageManager.UI.Commands;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
@@ -58,11 +60,18 @@ namespace GarageManager.UI.ViewModels
 
         #endregion Properties
 
+        #region Commands
+
+        public ICommand SearchUsersListCommand { get; }
+
+        #endregion Commands
+
         #region Constructors
 
         public UsersListViewModel(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
             _usersListSearchCriteria = new UsersListSearchCriteria();
+            SearchUsersListCommand = new SearchUsersListCommand(this, usersService);
         }
 
         #endregion Constructors
