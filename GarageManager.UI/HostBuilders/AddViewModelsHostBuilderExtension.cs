@@ -30,7 +30,8 @@ namespace GarageManager.UI.HostBuilders
                 //services.AddSingleton<CreateViewModel<BuyViewModel>>(services => () => services.GetRequiredService<BuyViewModel>());
                 //services.AddSingleton<CreateViewModel<SellViewModel>>(services => () => services.GetRequiredService<SellViewModel>());
                 services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
-                services.AddSingleton<CreateViewModel<UsersListViewModel>>(services => () => CreatedUsersListViewModel(services));
+                services.AddSingleton<CreateViewModel<UsersListViewModel>>(services => () => CreateUsersListViewModel(services));
+                services.AddSingleton<CreateViewModel<CreateUserViewModel>>(services => () => CreateCreateUserViewModel(services));
                 //services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
@@ -52,9 +53,17 @@ namespace GarageManager.UI.HostBuilders
                 serviceProvider.GetRequiredService<IViewModelFactory>());
         }
 
-        private static UsersListViewModel CreatedUsersListViewModel(IServiceProvider serviceProvider)
+        private static UsersListViewModel CreateUsersListViewModel(IServiceProvider serviceProvider)
         {
             return new UsersListViewModel(
+                serviceProvider.GetRequiredService<IUsersService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static CreateUserViewModel CreateCreateUserViewModel(IServiceProvider serviceProvider)
+        {
+            return new CreateUserViewModel(
                 serviceProvider.GetRequiredService<IUsersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
                 serviceProvider.GetRequiredService<IViewModelFactory>());

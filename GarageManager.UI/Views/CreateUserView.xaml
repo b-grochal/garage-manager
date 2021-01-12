@@ -6,7 +6,22 @@
              xmlns:local="clr-namespace:GarageManager.UI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="10" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+            BorderBrush="{StaticResource PrimaryBlackBrush}"
+            BorderThickness="0 0 0 1"
+            Padding="0,10">
+            <TextBlock FontWeight="Bold" FontSize="20" Text="Create new user" />
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid>
+                <
+            </Grid>
+        </Grid>
             
     </Grid>
 </UserControl>

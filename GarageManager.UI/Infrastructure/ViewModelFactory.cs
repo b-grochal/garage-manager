@@ -20,13 +20,13 @@ namespace GarageManager.UI.Infrastructure
         private readonly CreateViewModel<HomeViewModel> _createViewModel;
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
         private readonly CreateViewModel<UsersListViewModel> createUsersListViewModel;
-        private readonly CreateViewModel<UsersListViewModel> createCreateUserViewModel;
+        private readonly CreateViewModel<CreateUserViewModel> createCreateUserViewModel;
 
         public ViewModelFactory(
             CreateViewModel<HomeViewModel> createViewModel, 
             CreateViewModel<LoginViewModel> createLoginViewModel, 
             CreateViewModel<UsersListViewModel> createUsersListViewModel, 
-            CreateViewModel<UsersListViewModel> createCreateUserViewModel)
+            CreateViewModel<CreateUserViewModel> createCreateUserViewModel)
         {
             this._createViewModel = createViewModel;
             this._createLoginViewModel = createLoginViewModel;

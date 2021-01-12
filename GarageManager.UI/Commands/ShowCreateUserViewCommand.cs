@@ -27,7 +27,7 @@ namespace GarageManager.UI.Commands
 
         public void Execute(object parameter)
         {
-            var createUserViewModel = viewModelFactory.CreateViewModel(ViewType.Home);
+            var createUserViewModel = viewModelFactory.CreateViewModel(ViewType.CreateUser);
             navigator.CurrentViewModel = createUserViewModel;
         }
     }

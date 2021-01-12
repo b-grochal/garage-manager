@@ -16,7 +16,7 @@
             BorderBrush="{StaticResource PrimaryBlackBrush}"
             BorderThickness="0 0 0 1" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                <Button Content="Add" Margin="0,0,2,0" FontSize="15" Padding="5"
+                <Button Content="Add" Margin="0,0,2,0" FontSize="15" Padding="5" Command="{Binding ShowCreateUserViewCommand}"
                     Background="{StaticResource PrimaryBlackBrush}"
                     Foreground="{StaticResource PrimarySilverBrush}"/>
                 <Button Content="Delete" Margin="0,0,2,0" FontSize="15" Padding="5"
