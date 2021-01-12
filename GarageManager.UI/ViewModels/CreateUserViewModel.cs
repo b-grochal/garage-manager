@@ -1,7 +1,12 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Interfaces;
+using GarageManager.UI.Commands;
+using GarageManager.UI.Infrastructure;
+using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
@@ -21,6 +26,10 @@ namespace GarageManager.UI.ViewModels
             get
             {
                 return this.user;
+            }
+            set
+            {
+                this.user = value;
             }
         }
 
@@ -54,6 +63,18 @@ namespace GarageManager.UI.ViewModels
 
         #region Commands
 
+        public ICommand CreateUserCommand { get; }
+
         #endregion Commands
+
+        #region Constructors
+
+        public CreateUserViewModel(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        {
+            this.User = new User();
+            this.CreateUserCommand = new CreateUserCommand(this, usersService, navigator, viewModelFactory);
+        }
+
+        #endregion Constructors
     }
 }

@@ -2,6 +2,7 @@
 using GarageManager.Data.Entities;
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,21 @@ namespace GarageManager.Services.Implementation
 {
     public class UsersService : IUsersService
     {
-        private readonly GarageManagerDbContext _garageManagerDbContext;
+        private readonly GarageManagerDbContext garageManagerDbContext;
+        private readonly IPasswordHasher<User> passwordHasher;
 
-        public UsersService(GarageManagerDbContext garageManagerDbContext)
+        public UsersService(GarageManagerDbContext garageManagerDbContext, IPasswordHasher<User> passwordHasher)
         {
-            this._garageManagerDbContext = garageManagerDbContext;
+            this.garageManagerDbContext = garageManagerDbContext;
+            this.passwordHasher = passwordHasher;
         }
 
-        public Task CreateUser(User user)
+        public async Task CreateUser(User user, string password)
         {
-            throw new NotImplementedException();
+            string passwordHash = passwordHasher.HashPassword(user, password);
+            user.PasswordHash = passwordHash;
+            await garageManagerDbContext.Users.AddAsync(user);
+            await garageManagerDbContext.SaveChangesAsync();
         }
 
         public Task DeleteUser(int userId)
@@ -32,13 +38,12 @@ namespace GarageManager.Services.Implementation
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _garageManagerDbContext.Users
-                .ToListAsync();
+            return await garageManagerDbContext.Users.ToListAsync();
         }
 
         public async Task<IEnumerable<User>> GetUsers(UsersListSearchCriteria usersListSearchCriteria)
         {
-            var queryable = _garageManagerDbContext.Users.AsQueryable();
+            var queryable = garageManagerDbContext.Users.AsQueryable();
 
             if (!string.IsNullOrEmpty(usersListSearchCriteria.Login))
             {
