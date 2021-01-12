@@ -31,7 +31,7 @@ namespace GarageManager.UI.ViewModels
             this._usersService = usersSerivce;
 
 
-            this.ShowHomePageCommand = new ShowHomePageCommand(navigator, viewModelFactory);
+            this.ShowHomePageCommand = new ShowHomeViewCommand(navigator, viewModelFactory);
             this.ShowUsersListCommand = new ShowUsersListCommand(usersSerivce, navigator, viewModelFactory);
 
             _navigator.StateChanged += Navigator_StateChanged;

@@ -8,12 +8,12 @@ using System.Windows.Input;
 
 namespace GarageManager.UI.Commands
 {
-    public class ShowHomePageCommand : ICommand
+    public class ShowHomeViewCommand : ICommand
     {
         private readonly INavigator _navigator;
         private readonly IViewModelFactory _viewModelFactory;
 
-        public ShowHomePageCommand(INavigator navigator, IViewModelFactory viewModelFactory)
+        public ShowHomeViewCommand(INavigator navigator, IViewModelFactory viewModelFactory)
         {
             this._navigator = navigator;
             this._viewModelFactory = viewModelFactory;

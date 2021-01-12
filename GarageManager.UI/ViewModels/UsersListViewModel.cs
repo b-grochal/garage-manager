@@ -16,8 +16,8 @@ namespace GarageManager.UI.ViewModels
     {
         #region Fields
 
-        private UsersListSearchCriteria _usersListSearchCriteria;
-        private IEnumerable<User> _users;
+        private UsersListSearchCriteria usersListSearchCriteria;
+        private IEnumerable<User> users;
 
         #endregion Fields
 
@@ -27,7 +27,7 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return _usersListSearchCriteria;
+                return usersListSearchCriteria;
             }
         }
 
@@ -35,11 +35,11 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this._usersListSearchCriteria.Login;
+                return this.usersListSearchCriteria.Login;
             }
             set
             {
-                this._usersListSearchCriteria.Login = value;;
+                this.usersListSearchCriteria.Login = value;;
                 OnPropertyChanged(nameof(LoginSearchCirteria));
             }
         }
@@ -49,11 +49,11 @@ namespace GarageManager.UI.ViewModels
         { 
             get 
             {
-                return this._users;
+                return this.users;
             } 
             set 
             {
-                this._users = value;
+                this.users = value;
                 OnPropertyChanged(nameof(Users));
             } 
         }
@@ -63,6 +63,7 @@ namespace GarageManager.UI.ViewModels
         #region Commands
 
         public ICommand SearchUsersListCommand { get; }
+        public ICommand ShowCreateUserViewCommand { get; }
 
         #endregion Commands
 
@@ -70,8 +71,9 @@ namespace GarageManager.UI.ViewModels
 
         public UsersListViewModel(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            _usersListSearchCriteria = new UsersListSearchCriteria();
-            SearchUsersListCommand = new SearchUsersListCommand(this, usersService);
+            this.usersListSearchCriteria = new UsersListSearchCriteria();
+            this.SearchUsersListCommand = new SearchUsersListCommand(this, usersService);
+            this.ShowCreateUserViewCommand = new ShowCreateUserViewCommand(navigator, viewModelFactory);
         }
 
         #endregion Constructors

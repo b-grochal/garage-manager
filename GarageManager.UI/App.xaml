@@ -23,6 +23,10 @@
                 <views:UsersListView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:CreateUserViewModel}">
+                <views:CreateUserView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

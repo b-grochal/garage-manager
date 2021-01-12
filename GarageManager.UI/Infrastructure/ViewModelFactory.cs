@@ -5,6 +5,14 @@ using System.Text;
 
 namespace GarageManager.UI.Infrastructure
 {
+    public enum ViewType
+    {
+        Home,
+        Login,
+        UsersList,
+        CreateUser
+    }
+
     public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : BaseViewModel;
 
     public class ViewModelFactory : IViewModelFactory
@@ -12,12 +20,18 @@ namespace GarageManager.UI.Infrastructure
         private readonly CreateViewModel<HomeViewModel> _createViewModel;
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
         private readonly CreateViewModel<UsersListViewModel> createUsersListViewModel;
+        private readonly CreateViewModel<UsersListViewModel> createCreateUserViewModel;
 
-        public ViewModelFactory(CreateViewModel<HomeViewModel> createViewModel, CreateViewModel<LoginViewModel> createLoginViewModel, CreateViewModel<UsersListViewModel> createUsersListViewModel)
+        public ViewModelFactory(
+            CreateViewModel<HomeViewModel> createViewModel, 
+            CreateViewModel<LoginViewModel> createLoginViewModel, 
+            CreateViewModel<UsersListViewModel> createUsersListViewModel, 
+            CreateViewModel<UsersListViewModel> createCreateUserViewModel)
         {
             this._createViewModel = createViewModel;
             this._createLoginViewModel = createLoginViewModel;
             this.createUsersListViewModel = createUsersListViewModel;
+            this.createCreateUserViewModel = createCreateUserViewModel;
         }
 
         public BaseViewModel CreateViewModel(ViewType viewType)
@@ -30,6 +44,8 @@ namespace GarageManager.UI.Infrastructure
                     return _createLoginViewModel();
                 case ViewType.UsersList:
                     return createUsersListViewModel();
+                case ViewType.CreateUser:
+                    return createCreateUserViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }
