@@ -23,7 +23,7 @@ namespace GarageManager.Services.Implementation
             this.passwordHasher = passwordHasher;
         }
 
-        public async Task CreateUser(User user, string password)
+        public async Task CreateUser(User user, string password, string confirmPassword)
         {
             string passwordHash = passwordHasher.HashPassword(user, password);
             user.PasswordHash = passwordHash;

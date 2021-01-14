@@ -16,8 +16,15 @@ namespace GarageManager.UI.ViewModels
 
         private User user;
         private string password;
+        private string confirmPassword;
 
         #endregion Fields
+
+        #region ViewModels
+
+        public MessageViewModel ErrorMessageViewModel { get; }
+
+        #endregion ViewModels
 
         #region Properties
 
@@ -59,6 +66,24 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        public string ConfirmPassword
+        {
+            get
+            {
+                return this.confirmPassword;
+            }
+            set
+            {
+                this.confirmPassword = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+
+        public string ErrorMessage
+        {
+            set => ErrorMessageViewModel.Message = value;
+        }
+
         #endregion Properties
 
         #region Commands
@@ -73,6 +98,7 @@ namespace GarageManager.UI.ViewModels
         {
             this.User = new User();
             this.CreateUserCommand = new CreateUserCommand(this, usersService, navigator, viewModelFactory);
+            this.ErrorMessageViewModel = new MessageViewModel();
         }
 
         #endregion Constructors
