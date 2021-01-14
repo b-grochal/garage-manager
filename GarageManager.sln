@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageManager.UI", "GarageManager.UI\GarageManager.UI.csproj", "{0FD96772-24AB-456B-B49A-AB67DFA7659E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageManager.UI", "GarageManager.UI\GarageManager.UI.csproj", "{0FD96772-24AB-456B-B49A-AB67DFA7659E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageManager.Data", "GarageManager.Data\GarageManager.Data.csproj", "{3D341711-A4A6-4BB4-9E74-9FC7B942D325}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageManager.Data", "GarageManager.Data\GarageManager.Data.csproj", "{3D341711-A4A6-4BB4-9E74-9FC7B942D325}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageManager.Services", "GarageManager.Services\GarageManager.Services.csproj", "{A52980AD-77D6-4DDF-AA1D-45FBC8F43996}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageManager.Services", "GarageManager.Services\GarageManager.Services.csproj", "{1ABA881B-B72E-4A50-B417-51F6CE3203F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{3D341711-A4A6-4BB4-9E74-9FC7B942D325}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D341711-A4A6-4BB4-9E74-9FC7B942D325}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D341711-A4A6-4BB4-9E74-9FC7B942D325}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A52980AD-77D6-4DDF-AA1D-45FBC8F43996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A52980AD-77D6-4DDF-AA1D-45FBC8F43996}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A52980AD-77D6-4DDF-AA1D-45FBC8F43996}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A52980AD-77D6-4DDF-AA1D-45FBC8F43996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ABA881B-B72E-4A50-B417-51F6CE3203F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ABA881B-B72E-4A50-B417-51F6CE3203F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ABA881B-B72E-4A50-B417-51F6CE3203F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ABA881B-B72E-4A50-B417-51F6CE3203F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
