@@ -14,12 +14,12 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Background="White"
-        BorderBrush="Gray"
+        BorderBrush="{StaticResource PrimaryBlackBrush}"
         BorderThickness="3"
         CornerRadius="10">
-        <Border.Effect>
+        <!--<Border.Effect>
             <DropShadowEffect BlurRadius="10" Color="Gray" />
-        </Border.Effect>
+        </Border.Effect>-->
         <Grid Grid.IsSharedSizeScope="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
