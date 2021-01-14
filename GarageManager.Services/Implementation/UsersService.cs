@@ -31,9 +31,11 @@ namespace GarageManager.Services.Implementation
             await garageManagerDbContext.SaveChangesAsync();
         }
 
-        public Task DeleteUser(int userId)
+        public async Task DeleteUser(int userId)
         {
-            throw new NotImplementedException();
+            var user = garageManagerDbContext.Users.Find(userId);
+            garageManagerDbContext.Users.Remove(user);
+            await garageManagerDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<User>> GetUsers()

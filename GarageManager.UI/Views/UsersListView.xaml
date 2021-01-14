@@ -19,7 +19,7 @@
                 <Button Content="Add" Margin="0,0,2,0" FontSize="15" Padding="5" Command="{Binding ShowCreateUserViewCommand}"
                     Background="{StaticResource PrimaryBlackBrush}"
                     Foreground="{StaticResource PrimarySilverBrush}"/>
-                <Button Content="Delete" Margin="0,0,2,0" FontSize="15" Padding="5"
+                <Button Content="Delete" Margin="0,0,2,0" FontSize="15" Padding="5" Command="{Binding DeleteUserCommand}"
                     Background="{StaticResource PrimaryBlackBrush}"
                     Foreground="{StaticResource PrimarySilverBrush}"/>
             </StackPanel>
@@ -40,7 +40,7 @@
                     Foreground="{StaticResource PrimarySilverBrush}"/>
             </Grid>
         </Border>
-        <ListView Grid.Row="2" Margin="10, 10" ItemsSource="{Binding Users}" BorderBrush="{StaticResource PrimaryBlackBrush}" >
+        <ListView Grid.Row="2" Margin="10, 10" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" BorderBrush="{StaticResource PrimaryBlackBrush}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>

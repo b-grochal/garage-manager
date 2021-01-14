@@ -18,6 +18,7 @@ namespace GarageManager.UI.ViewModels
 
         private UsersListSearchCriteria usersListSearchCriteria;
         private IEnumerable<User> users;
+        private User selectedUser;
 
         #endregion Fields
 
@@ -58,12 +59,26 @@ namespace GarageManager.UI.ViewModels
             } 
         }
 
+        public User SelectedUser
+        {
+            get
+            {
+                return this.selectedUser;
+            }
+            set
+            {
+                this.selectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
+            }
+        }
+
         #endregion Properties
 
         #region Commands
 
         public ICommand SearchUsersListCommand { get; }
         public ICommand ShowCreateUserViewCommand { get; }
+        public ICommand DeleteUserCommand { get; }
 
         #endregion Commands
 
@@ -74,6 +89,7 @@ namespace GarageManager.UI.ViewModels
             this.usersListSearchCriteria = new UsersListSearchCriteria();
             this.SearchUsersListCommand = new SearchUsersListCommand(this, usersService);
             this.ShowCreateUserViewCommand = new ShowCreateUserViewCommand(navigator, viewModelFactory);
+            this.DeleteUserCommand = new DeleteUserCommand(this, usersService);
         }
 
         #endregion Constructors

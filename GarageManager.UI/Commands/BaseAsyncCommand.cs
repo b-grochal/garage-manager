@@ -18,11 +18,16 @@ namespace GarageManager.UI.Commands
             set
             {
                 _isExecuting = value;
-                CanExecuteChanged?.Invoke(this, new EventArgs());
+                CommandManager.InvalidateRequerySuggested();
+                //CanExecuteChanged?.Invoke(this, new EventArgs());
             }
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged 
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public virtual bool CanExecute(object parameter)
         {
