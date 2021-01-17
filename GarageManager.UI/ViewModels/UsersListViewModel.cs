@@ -40,7 +40,7 @@ namespace GarageManager.UI.ViewModels
             }
             set
             {
-                this.usersListSearchCriteria.Login = value;;
+                this.usersListSearchCriteria.Login = value;
                 OnPropertyChanged(nameof(LoginSearchCirteria));
             }
         }
