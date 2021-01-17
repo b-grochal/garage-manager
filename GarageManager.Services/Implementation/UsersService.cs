@@ -14,12 +14,12 @@ namespace GarageManager.Services.Implementation
 {
     public class UsersService : IUsersService
     {
-        private readonly GarageManagerDbContext garageManagerDbContext;
+        private readonly GarageManagerDbContext context;
         private readonly IPasswordHasher<User> passwordHasher;
 
         public UsersService(GarageManagerDbContext garageManagerDbContext, IPasswordHasher<User> passwordHasher)
         {
-            this.garageManagerDbContext = garageManagerDbContext;
+            this.context = garageManagerDbContext;
             this.passwordHasher = passwordHasher;
         }
 
@@ -27,25 +27,25 @@ namespace GarageManager.Services.Implementation
         {
             string passwordHash = passwordHasher.HashPassword(user, password);
             user.PasswordHash = passwordHash;
-            await garageManagerDbContext.Users.AddAsync(user);
-            await garageManagerDbContext.SaveChangesAsync();
+            await context.Users.AddAsync(user);
+            await context.SaveChangesAsync();
         }
 
         public async Task DeleteUser(int userId)
         {
-            var user = garageManagerDbContext.Users.Find(userId);
-            garageManagerDbContext.Users.Remove(user);
-            await garageManagerDbContext.SaveChangesAsync();
+            var user = context.Users.Find(userId);
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await garageManagerDbContext.Users.ToListAsync();
+            return await context.Users.ToListAsync();
         }
 
         public async Task<IEnumerable<User>> GetUsers(UsersListSearchCriteria usersListSearchCriteria)
         {
-            var queryable = garageManagerDbContext.Users.AsQueryable();
+            var queryable = context.Users.AsQueryable();
 
             if (!string.IsNullOrEmpty(usersListSearchCriteria.Login))
             {
