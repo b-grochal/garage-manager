@@ -1,5 +1,6 @@
 ﻿using GarageManager.Data.Entities;
 using GarageManager.Services.SearchCriteria;
+using GarageManager.UI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -96,7 +97,7 @@ namespace GarageManager.UI.ViewModels
 
         public CustomersListViewModel()
         {
-
+            this.SearchCustomersListCommand = new SearchCustomersListCommand()
         }
 
         #endregion Constructors
