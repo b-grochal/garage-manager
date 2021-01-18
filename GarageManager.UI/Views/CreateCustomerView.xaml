@@ -75,7 +75,7 @@
                     Background="{StaticResource PrimaryBlackBrush}"
                     Foreground="{StaticResource PrimarySilverBrush}"
                     HorizontalAlignment="Center"
-                    Command="{Binding CreateUserCommand}"
+                    Command="{Binding CreateCustomerCommand}"
                     Content="Create user"
                     IsDefault="True" />
 
