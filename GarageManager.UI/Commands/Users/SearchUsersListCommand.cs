@@ -10,19 +10,19 @@ namespace GarageManager.UI.Commands
 {
     public class SearchUsersListCommand : BaseAsyncCommand
     {
-        private readonly UsersListViewModel _usersListViewModel;
-        private readonly IUsersService _usersService;
+        private readonly UsersListViewModel usersListViewModel;
+        private readonly IUsersService usersService;
 
         public SearchUsersListCommand(UsersListViewModel usersListViewModel, IUsersService usersService)
         {
-            this._usersListViewModel = usersListViewModel;
-            this._usersService = usersService;
+            this.usersListViewModel = usersListViewModel;
+            this.usersService = usersService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            IEnumerable<User> filteredUsers = await _usersService.GetUsers(_usersListViewModel.UsersListSearchCriteria);
-            _usersListViewModel.Users = filteredUsers;
+            IEnumerable<User> filteredUsers = await usersService.GetUsers(usersListViewModel.UsersListSearchCriteria);
+            usersListViewModel.Users = filteredUsers;
         }
     }
 }
