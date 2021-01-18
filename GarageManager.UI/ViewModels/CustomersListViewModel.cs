@@ -1,6 +1,9 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
 using GarageManager.UI.Commands;
+using GarageManager.UI.Infrastructure;
+using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -89,15 +92,19 @@ namespace GarageManager.UI.ViewModels
         public ICommand ShowCreateCustomerViewCommand { get; }
         public ICommand ShowEditCustomerViewCommand { get; }
         public ICommand ShowCustomerDetailsViewCommand { get; }
-        public ICommand DeleteCreateCommand { get; }
+        public ICommand DeleteCustomerCommand { get; }
 
         #endregion Commands
 
         #region Constructors
 
-        public CustomersListViewModel()
+        public CustomersListViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            this.SearchCustomersListCommand = new SearchCustomersListCommand()
+            this.SearchCustomersListCommand = new SearchCustomersListCommand(this, customersService);
+            this.ShowCreateCustomerViewCommand = new ShowCreateCustomerViewCommand(navigator, viewModelFactory);
+            this.ShowEditCustomerViewCommand = new ShowEditCustomerViewCommand(this, customersService, navigator, viewModelFactory);
+            this.ShowCustomerDetailsViewCommand = new ShowCustomerDetailsViewCommand(this, customersService, navigator, viewModelFactory);
+            this.DeleteCustomerCommand = new DeleteCustomerCommand(this, customersService);
         }
 
         #endregion Constructors
