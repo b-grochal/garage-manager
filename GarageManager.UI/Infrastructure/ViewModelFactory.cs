@@ -21,21 +21,33 @@ namespace GarageManager.UI.Infrastructure
 
     public class ViewModelFactory : IViewModelFactory
     {
-        private readonly CreateViewModel<HomeViewModel> _createViewModel;
-        private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
+        private readonly CreateViewModel<HomeViewModel> createViewModel;
+        private readonly CreateViewModel<LoginViewModel> createLoginViewModel;
         private readonly CreateViewModel<UsersListViewModel> createUsersListViewModel;
         private readonly CreateViewModel<CreateUserViewModel> createCreateUserViewModel;
+        private readonly CreateViewModel<CustomersListViewModel> createCustomersListViewModel;
+        private readonly CreateViewModel<CreateCustomerViewModel> createCreateCustomerViewModel;
+        private readonly CreateViewModel<EditCustomerViewModel> createEditCustomerViewModel;
+        private readonly CreateViewModel<CustomerDetailsViewModel> createCustomerDetailsViewModel;
 
         public ViewModelFactory(
             CreateViewModel<HomeViewModel> createViewModel, 
             CreateViewModel<LoginViewModel> createLoginViewModel, 
             CreateViewModel<UsersListViewModel> createUsersListViewModel, 
-            CreateViewModel<CreateUserViewModel> createCreateUserViewModel)
+            CreateViewModel<CreateUserViewModel> createCreateUserViewModel,
+            CreateViewModel<CustomersListViewModel> createCustomersListViewModel,
+            CreateViewModel<CreateCustomerViewModel> createCreateCustomerViewModel,
+            CreateViewModel<EditCustomerViewModel> createEditCustomerViewModel,
+            CreateViewModel<CustomerDetailsViewModel> createCustomerDetailsViewModel)
         {
-            this._createViewModel = createViewModel;
-            this._createLoginViewModel = createLoginViewModel;
+            this.createViewModel = createViewModel;
+            this.createLoginViewModel = createLoginViewModel;
             this.createUsersListViewModel = createUsersListViewModel;
             this.createCreateUserViewModel = createCreateUserViewModel;
+            this.createCustomersListViewModel = createCustomersListViewModel;
+            this.createCreateCustomerViewModel = createCreateCustomerViewModel;
+            this.createEditCustomerViewModel = createEditCustomerViewModel;
+            this.createCustomerDetailsViewModel = createCustomerDetailsViewModel;
         }
 
         public BaseViewModel CreateViewModel(ViewType viewType)
@@ -43,13 +55,21 @@ namespace GarageManager.UI.Infrastructure
             switch (viewType)
             {
                 case ViewType.Home:
-                    return _createViewModel();
+                    return createViewModel();
                 case ViewType.Login:
-                    return _createLoginViewModel();
+                    return createLoginViewModel();
                 case ViewType.UsersList:
                     return createUsersListViewModel();
                 case ViewType.CreateUser:
                     return createCreateUserViewModel();
+                case ViewType.CustomersList:
+                    return createCustomersListViewModel();
+                case ViewType.CreateCustomer:
+                    return createCreateCustomerViewModel();
+                case ViewType.EditCustomer:
+                    return createEditCustomerViewModel();
+                case ViewType.CustomersDetails:
+                    return createCustomerDetailsViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }

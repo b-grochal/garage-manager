@@ -32,6 +32,10 @@ namespace GarageManager.UI.HostBuilders
                 services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
                 services.AddSingleton<CreateViewModel<UsersListViewModel>>(services => () => CreateUsersListViewModel(services));
                 services.AddSingleton<CreateViewModel<CreateUserViewModel>>(services => () => CreateCreateUserViewModel(services));
+                services.AddSingleton<CreateViewModel<CustomersListViewModel>>(services => () => CreateCustomersListViewModel(services));
+                services.AddSingleton<CreateViewModel<CreateCustomerViewModel>>(services => () => CreateCreateCustomerViewModel(services));
+                services.AddSingleton<CreateViewModel<CustomerDetailsViewModel>>(services => () => CreateCustomerDetailsViewModel(services));
+                services.AddSingleton<CreateViewModel<EditCustomerViewModel>>(services => () => CreateEditCustomerViewModel(services));
                 //services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
@@ -67,6 +71,35 @@ namespace GarageManager.UI.HostBuilders
                 serviceProvider.GetRequiredService<IUsersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
                 serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static CustomersListViewModel CreateCustomersListViewModel(IServiceProvider serviceProvider)
+        {
+            return new CustomersListViewModel(
+                serviceProvider.GetRequiredService<ICustomersService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static CreateCustomerViewModel CreateCreateCustomerViewModel(IServiceProvider serviceProvider)
+        {
+            return new CreateCustomerViewModel(
+                serviceProvider.GetRequiredService<ICustomersService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static EditCustomerViewModel CreateEditCustomerViewModel(IServiceProvider serviceProvider)
+        {
+            return new EditCustomerViewModel(
+                serviceProvider.GetRequiredService<ICustomersService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static CustomerDetailsViewModel CreateCustomerDetailsViewModel(IServiceProvider serviceProvider)
+        {
+            return new CustomerDetailsViewModel();
         }
     }
 }
