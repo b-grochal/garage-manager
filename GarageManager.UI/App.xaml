@@ -31,6 +31,18 @@
                 <views:CustomersListView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:CreateCustomerViewModel}">
+                <views:CreateCustomerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:CustomerDetailsViewModel}">
+                <views:CustomerDetailsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:EditCustomerViewModel}">
+                <views:EditCustomerView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
