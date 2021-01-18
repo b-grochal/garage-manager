@@ -33,5 +33,10 @@ namespace GarageManager.UI.Commands
             editCustomerViewModel.Customer = customer;
             navigator.CurrentViewModel = editCustomerViewModel;
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && this.customersListViewModel.SelectedCustomer != null;
+        }
     }
 }
