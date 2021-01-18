@@ -22,8 +22,9 @@ namespace GarageManager.UI.ViewModels
 
         public ICommand ShowHomePageCommand { get; }
         public ICommand ShowUsersListCommand { get; }
+        public ICommand ShowCustomersListCommand { get; }
 
-        public MainViewModel(IViewModelFactory viewModelFactory, IAuthenticator authenticator, INavigator navigator, IUsersService usersSerivce)
+        public MainViewModel(IViewModelFactory viewModelFactory, IAuthenticator authenticator, INavigator navigator, IUsersService usersSerivce, ICustomersService customersService)
         {
             this._viewModelFactory = viewModelFactory;
             this._authenticator = authenticator;
@@ -33,6 +34,7 @@ namespace GarageManager.UI.ViewModels
 
             this.ShowHomePageCommand = new ShowHomeViewCommand(navigator, viewModelFactory);
             this.ShowUsersListCommand = new ShowUsersListCommand(usersSerivce, navigator, viewModelFactory);
+            this.ShowCustomersListCommand = new ShowCustomersListCommand(customersService, navigator, viewModelFactory);
 
             _navigator.StateChanged += Navigator_StateChanged;
             _authenticator.StateChanged += Authenticator_StateChanged;
