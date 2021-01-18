@@ -100,6 +100,7 @@ namespace GarageManager.UI.ViewModels
 
         public CustomersListViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
+            this.customersListSearchCriteria = new CustomersListSearchCriteria();
             this.SearchCustomersListCommand = new SearchCustomersListCommand(this, customersService);
             this.ShowCreateCustomerViewCommand = new ShowCreateCustomerViewCommand(navigator, viewModelFactory);
             this.ShowEditCustomerViewCommand = new ShowEditCustomerViewCommand(this, customersService, navigator, viewModelFactory);
