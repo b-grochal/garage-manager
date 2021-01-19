@@ -20,7 +20,7 @@ namespace GarageManager.Services.Implementation
             this.context = context;
         }
 
-        public async Task CreateCustomer(Car car)
+        public async Task CreateCar(Car car)
         {
             await context.Cars.AddAsync(car);
             await context.SaveChangesAsync();

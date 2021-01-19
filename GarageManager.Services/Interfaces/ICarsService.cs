@@ -14,6 +14,6 @@ namespace GarageManager.Services.Interfaces
         Task<Car> GetCar(int carId);
         Task EditCar(Car car);
         Task DeleteCar(int carId);
-        Task CreateCustomer(Car car);
+        Task CreateCar(Car car);
     }
 }

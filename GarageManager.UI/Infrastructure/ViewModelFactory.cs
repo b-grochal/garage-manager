@@ -14,7 +14,11 @@ namespace GarageManager.UI.Infrastructure
         CustomersList,
         CreateCustomer,
         EditCustomer,
-        CustomersDetails
+        CustomersDetails,
+        CarsList,
+        CreateCar,
+        EditCar,
+        CarDetails
     }
 
     public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : BaseViewModel;
