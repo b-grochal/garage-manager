@@ -119,8 +119,8 @@
                     Background="{StaticResource PrimaryBlackBrush}"
                     Foreground="{StaticResource PrimarySilverBrush}"
                     HorizontalAlignment="Center"
-                    Command="{Binding CreateCustomerCommand}"
-                    Content="Create user"
+                    Command="{Binding CreateCarCommand}"
+                    Content="Create car"
                     IsDefault="True" />
 
                 <TextBlock Grid.Row="9" Margin="0,10,0,0"
