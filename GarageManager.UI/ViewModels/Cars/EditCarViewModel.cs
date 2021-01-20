@@ -10,6 +10,7 @@ namespace GarageManager.UI.ViewModels
         #region Fields
 
         private Car car;
+        private IEnumerable<Customer> customers;
 
         #endregion Fields
 
@@ -120,6 +121,31 @@ namespace GarageManager.UI.ViewModels
             {
                 this.car.Transmission = value;
                 OnPropertyChanged(nameof(Transmission));
+            }
+        }
+
+        public int CustomerId
+        {
+            get
+            {
+                return this.car.CustomerId;
+            }
+            set
+            {
+                this.car.CustomerId = value;
+                OnPropertyChanged(nameof(CustomerId));
+            }
+        }
+
+        public IEnumerable<Customer> Customers
+        {
+            get
+            {
+                return this.customers;
+            }
+            set
+            {
+                this.customers = value;
             }
         }
 
