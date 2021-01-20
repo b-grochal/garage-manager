@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GarageManager.UI.Views.Cars
+namespace GarageManager.UI.Views
 {
     /// <summary>
     /// Interaction logic for CarsListView.xaml
