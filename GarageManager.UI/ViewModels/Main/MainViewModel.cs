@@ -1,5 +1,6 @@
 ﻿using GarageManager.Services.Interfaces;
 using GarageManager.UI.Commands;
+using GarageManager.UI.Commands.Cars;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Authenticator;
 using GarageManager.UI.State.Navigator;
@@ -23,8 +24,15 @@ namespace GarageManager.UI.ViewModels
         public ICommand ShowHomePageCommand { get; }
         public ICommand ShowUsersListCommand { get; }
         public ICommand ShowCustomersListCommand { get; }
+        public ICommand ShowCarsListCommand { get;  }
 
-        public MainViewModel(IViewModelFactory viewModelFactory, IAuthenticator authenticator, INavigator navigator, IUsersService usersSerivce, ICustomersService customersService)
+        public MainViewModel(
+            IViewModelFactory viewModelFactory, 
+            IAuthenticator authenticator, 
+            INavigator navigator, 
+            IUsersService usersSerivce, 
+            ICustomersService customersService, 
+            ICarsService carsService)
         {
             this._viewModelFactory = viewModelFactory;
             this._authenticator = authenticator;
@@ -35,6 +43,7 @@ namespace GarageManager.UI.ViewModels
             this.ShowHomePageCommand = new ShowHomeViewCommand(navigator, viewModelFactory);
             this.ShowUsersListCommand = new ShowUsersListCommand(usersSerivce, navigator, viewModelFactory);
             this.ShowCustomersListCommand = new ShowCustomersListCommand(customersService, navigator, viewModelFactory);
+            this.ShowCarsListCommand = new ShowCarsListCommand(carsService, navigator, viewModelFactory);
 
             _navigator.StateChanged += Navigator_StateChanged;
             _authenticator.StateChanged += Authenticator_StateChanged;
