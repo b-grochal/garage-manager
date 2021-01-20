@@ -1,5 +1,6 @@
 ﻿using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
+using GarageManager.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,7 +28,7 @@ namespace GarageManager.UI.Commands
 
         public void Execute(object parameter)
         {
-            var createUserViewModel = viewModelFactory.CreateViewModel(ViewType.CreateCustomer);
+            BaseViewModel createUserViewModel = viewModelFactory.CreateViewModel(ViewType.CreateCustomer);
             navigator.CurrentViewModel = createUserViewModel;
         }
     }

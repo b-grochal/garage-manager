@@ -17,9 +17,9 @@ namespace GarageManager.Services.Implementation
         private readonly GarageManagerDbContext context;
         private readonly IPasswordHasher<User> passwordHasher;
 
-        public UsersService(GarageManagerDbContext garageManagerDbContext, IPasswordHasher<User> passwordHasher)
+        public UsersService(GarageManagerDbContext context, IPasswordHasher<User> passwordHasher)
         {
-            this.context = garageManagerDbContext;
+            this.context = context;
             this.passwordHasher = passwordHasher;
         }
 
