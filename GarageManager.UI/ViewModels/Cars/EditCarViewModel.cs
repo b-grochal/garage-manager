@@ -1,7 +1,12 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Interfaces;
+using GarageManager.UI.Commands.Cars;
+using GarageManager.UI.Infrastructure;
+using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
@@ -149,17 +154,25 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        public string ErrorMessage
+        {
+            set => ErrorMessageViewModel.Message = value;
+        }
+
         #endregion Properties
 
         #region Commands
+
+        public ICommand EditCarCommand { get; }
 
         #endregion Commands
 
         #region Constructors
 
-        public EditCarViewModel()
+        public EditCarViewModel(ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-
+            this.ErrorMessageViewModel = new MessageViewModel();
+            this.EditCarCommand = new EditCarCommand(this, carsService, navigator, viewModelFactory);
         }
 
         #endregion Constructors
