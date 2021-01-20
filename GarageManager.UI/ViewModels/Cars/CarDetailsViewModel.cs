@@ -60,7 +60,7 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
-        public string FuleType
+        public string FuelType
         {
             get
             {

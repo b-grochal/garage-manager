@@ -42,10 +42,10 @@
 
                     <TextBlock Grid.Column="0" Text="Brand:" FontSize="15" />
                     <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Brand}" IsReadOnly="True" />
+                        Text="{Binding Brand, Mode=OneWay}" IsReadOnly="True" />
                     <TextBlock Grid.Column="2" Text="Model:" FontSize="15" Margin="10,0,0,0" />
                     <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Model}" IsReadOnly="True" />
+                        Text="{Binding Model, Mode=OneWay}" IsReadOnly="True" />
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="0,5">
@@ -58,10 +58,10 @@
 
                     <TextBlock Grid.Column="0" Text="VIN number:" FontSize="15" />
                     <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Vin}" IsReadOnly="True" />
+                        Text="{Binding Vin, Mode=OneWay}" IsReadOnly="True" />
                     <TextBlock Grid.Column="2" Text="Reg. number:" FontSize="15" Margin="10,0,0,0" />
                     <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding RegistrationNumber}" IsReadOnly="True" />
+                        Text="{Binding RegistrationNumber, Mode=OneWay}" IsReadOnly="True" />
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="0,5">
@@ -74,10 +74,10 @@
 
                     <TextBlock Grid.Column="0" Text="Fuel type:" FontSize="15" />
                     <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding FuelType}" IsReadOnly="True" />
+                        Text="{Binding FuelType, Mode=OneWay}" IsReadOnly="True" />
                     <TextBlock Grid.Column="2" Text="Engine:" FontSize="15" Margin="10,0,0,0" />
                     <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Engine}" IsReadOnly="True" />
+                        Text="{Binding Engine, Mode=OneWay}" IsReadOnly="True" />
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="0,5">
@@ -90,10 +90,10 @@
 
                     <TextBlock Grid.Column="0" Text="Transmision:" FontSize="15" />
                     <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Vin}" IsReadOnly="True" />
+                        Text="{Binding Vin, Mode=OneWay}" IsReadOnly="True" />
                     <TextBlock Grid.Column="2" Text="Owner:" FontSize="15" Margin="10,0,0,0" />
                     <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Brand}" IsReadOnly="True" />
+                        Text="{Binding Brand, Mode=OneWay}" IsReadOnly="True" />
                 </Grid>
 
 
