@@ -43,6 +43,9 @@
                     <RadioButton Content="Customers" 
                                  Command="{Binding ShowCustomersListCommand}"
                                  IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:CustomersListViewModel}}"/>
+                    <RadioButton Content="Cars" 
+                                 Command="{Binding ShowCarsListCommand}"
+                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:CarsListViewModel}}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
