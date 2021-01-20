@@ -36,6 +36,10 @@ namespace GarageManager.UI.HostBuilders
                 services.AddSingleton<CreateViewModel<CreateCustomerViewModel>>(services => () => CreateCreateCustomerViewModel(services));
                 services.AddSingleton<CreateViewModel<CustomerDetailsViewModel>>(services => () => CreateCustomerDetailsViewModel(services));
                 services.AddSingleton<CreateViewModel<EditCustomerViewModel>>(services => () => CreateEditCustomerViewModel(services));
+                services.AddSingleton<CreateViewModel<CarsListViewModel>>(services => () => CreateCarsListViewModel(services));
+                services.AddSingleton<CreateViewModel<CreateCarViewModel>>(services => () => CreateCreateCarViewModel(services));
+                services.AddSingleton<CreateViewModel<CarDetailsViewModel>>(services => () => CreateCarDetailsViewModel(services));
+                services.AddSingleton<CreateViewModel<EditCarViewModel>>(services => () => CreateEditCarViewModel(services));
                 //services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
@@ -100,6 +104,36 @@ namespace GarageManager.UI.HostBuilders
         private static CustomerDetailsViewModel CreateCustomerDetailsViewModel(IServiceProvider serviceProvider)
         {
             return new CustomerDetailsViewModel();
+        }
+
+        private static CarsListViewModel CreateCarsListViewModel(IServiceProvider serviceProvider)
+        {
+            return new CarsListViewModel(
+                serviceProvider.GetRequiredService<ICarsService>(),
+                serviceProvider.GetRequiredService<ICustomersService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static CreateCarViewModel CreateCreateCarViewModel(IServiceProvider serviceProvider)
+        {
+            return new CreateCarViewModel(
+                serviceProvider.GetRequiredService<ICarsService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static EditCarViewModel CreateEditCarViewModel(IServiceProvider serviceProvider)
+        {
+            return new EditCarViewModel(
+                serviceProvider.GetRequiredService<ICarsService>(),
+                serviceProvider.GetRequiredService<INavigator>(),
+                serviceProvider.GetRequiredService<IViewModelFactory>());
+        }
+
+        private static CarDetailsViewModel CreateCarDetailsViewModel(IServiceProvider serviceProvider)
+        {
+            return new CarDetailsViewModel();
         }
     }
 }
