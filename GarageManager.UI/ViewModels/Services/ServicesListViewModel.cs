@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GarageManager.UI.ViewModels.Services
+namespace GarageManager.UI.ViewModels
 {
     public class ServicesListViewModel : BaseViewModel
     {
