@@ -18,7 +18,11 @@ namespace GarageManager.UI.Infrastructure
         CarsList,
         CreateCar,
         EditCar,
-        CarDetails
+        CarDetails,
+        ServicesList,
+        CreateService,
+        EditService,
+        ServiceDetails
     }
 
     public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : BaseViewModel;
@@ -37,6 +41,10 @@ namespace GarageManager.UI.Infrastructure
         private readonly CreateViewModel<CreateCarViewModel> createCreateCarViewModel;
         private readonly CreateViewModel<EditCarViewModel> createEditCarViewModel;
         private readonly CreateViewModel<CarDetailsViewModel> createCarDetailsViewModel;
+        private readonly CreateViewModel<ServicesListViewModel> createServicesListViewModel;
+        private readonly CreateViewModel<CreateServiceViewModel> createCreateServiceViewModel;
+        private readonly CreateViewModel<EditServiceViewModel> createEditServiceViewModel;
+        private readonly CreateViewModel<ServiceDetailsViewModel> createServiceDetailsViewModel;
 
         public ViewModelFactory(
             CreateViewModel<HomeViewModel> createViewModel, 
@@ -50,7 +58,11 @@ namespace GarageManager.UI.Infrastructure
             CreateViewModel<CarsListViewModel> createCarsListViewModel,
             CreateViewModel<CreateCarViewModel> createCreateCarViewModel,
             CreateViewModel<EditCarViewModel> createEditCarViewModel,
-            CreateViewModel<CarDetailsViewModel> createCarDetailsViewModel)
+            CreateViewModel<CarDetailsViewModel> createCarDetailsViewModel,
+            CreateViewModel<ServicesListViewModel> createServicesListViewModel,
+            CreateViewModel<CreateServiceViewModel> createCreateServiceViewModel,
+            CreateViewModel<EditServiceViewModel> createEditServiceViewModel,
+            CreateViewModel<ServiceDetailsViewModel> createServiceDetailsViewModel)
         {
             this.createViewModel = createViewModel;
             this.createLoginViewModel = createLoginViewModel;
@@ -64,6 +76,10 @@ namespace GarageManager.UI.Infrastructure
             this.createCreateCarViewModel = createCreateCarViewModel;
             this.createEditCarViewModel = createEditCarViewModel;
             this.createCarDetailsViewModel = createCarDetailsViewModel;
+            this.createServicesListViewModel = createServicesListViewModel;
+            this.createCreateServiceViewModel = createCreateServiceViewModel;
+            this.createEditServiceViewModel = createEditServiceViewModel;
+            this.createServiceDetailsViewModel = createServiceDetailsViewModel;
         }
 
         public BaseViewModel CreateViewModel(ViewType viewType)
@@ -94,6 +110,14 @@ namespace GarageManager.UI.Infrastructure
                     return createEditCarViewModel();
                 case ViewType.CarDetails:
                     return createCarDetailsViewModel();
+                case ViewType.ServicesList:
+                    return createServicesListViewModel();
+                case ViewType.CreateService:
+                    return createCreateServiceViewModel();
+                case ViewType.EditService:
+                    return createEditServiceViewModel();
+                case ViewType.ServiceDetails:
+                    return createServiceDetailsViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }
