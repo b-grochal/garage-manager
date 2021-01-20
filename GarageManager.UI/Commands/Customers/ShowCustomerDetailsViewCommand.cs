@@ -29,9 +29,9 @@ namespace GarageManager.UI.Commands
         public override async Task ExecuteAsync(object parameter)
         {
             Customer customer = await customersService.GetCustomer(customersListViewModel.SelectedCustomer.CustomerId);
-            CustomerDetailsViewModel editCustomerViewModel = (CustomerDetailsViewModel)viewModelFactory.CreateViewModel(ViewType.CustomersDetails);
-            editCustomerViewModel.Customer = customer;
-            navigator.CurrentViewModel = editCustomerViewModel;
+            CustomerDetailsViewModel customerDetailsViewModel = (CustomerDetailsViewModel)viewModelFactory.CreateViewModel(ViewType.CustomersDetails);
+            customerDetailsViewModel.Customer = customer;
+            navigator.CurrentViewModel = customerDetailsViewModel;
         }
 
         public override bool CanExecute(object parameter)
