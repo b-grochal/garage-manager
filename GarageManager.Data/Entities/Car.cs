@@ -16,5 +16,6 @@ namespace GarageManager.Data.Entities
         public string Engine { get; set; }
         public string Transmission { get; set; }
         public Customer Customer { get; set; }
+        public ICollection<Service> Services{ get; set; }
     }
 }

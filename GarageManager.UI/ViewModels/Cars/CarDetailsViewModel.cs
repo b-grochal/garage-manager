@@ -84,6 +84,27 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        public IEnumerable<Service> CarServices
+        {
+            get
+            {
+                return this.car.Services;
+            }
+        }
+
+        public Service SelectedService
+        {
+            get
+            {
+                return this.selectedService;
+            }
+            set
+            {
+                this.selectedService = value;
+                OnPropertyChanged(nameof(SelectedService));
+            }
+        }
+
         #endregion Properties
 
         #region Constructors
