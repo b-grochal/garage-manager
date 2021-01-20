@@ -89,7 +89,7 @@ namespace GarageManager.UI.ViewModels
             this.carsListSearchCriteria = new CarsListSearchCriteria();
             this.SearchCarsListCommand = new SearchCarsListCommand(this, carsService);
             this.ShowCreateCarViewCommand = new ShowCreateCarViewCommand(customersService, navigator, viewModelFactory);
-            this.ShowEditCarViewCommand = new ShowEditCarViewCommand(customersService, navigator, viewModelFactory);
+            this.ShowEditCarViewCommand = new ShowEditCarViewCommand(this, carsService, customersService, navigator, viewModelFactory);
             this.ShowCarDetailsViewCommand = new ShowCarDetialsViewCommand(this, carsService, navigator, viewModelFactory);
             this.DeleteCarCommand = new DeleteCarCommand(this, carsService);
         }
