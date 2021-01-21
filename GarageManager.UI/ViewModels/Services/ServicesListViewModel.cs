@@ -1,8 +1,13 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
+using GarageManager.UI.Commands.Services;
+using GarageManager.UI.Infrastructure;
+using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
@@ -69,13 +74,24 @@ namespace GarageManager.UI.ViewModels
 
         #region Commands
 
+        public ICommand SearchServicesListCommand { get; }
+        public ICommand ShowCreateServiceViewCommand { get; }
+        public ICommand ShowEditServiceViewCommand { get; }
+        public ICommand ShowServiceDetailsViewCommand { get; }
+        public ICommand DeleteServiceCommand { get; }
+
         #endregion Commands
 
         #region Constructors
 
-        public ServicesListViewModel()
+        public ServicesListViewModel(IServicesService servicesService, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-
+            this.servicesListSearchCriteria = new ServicesListSearchCriteria();
+            this.SearchServicesListCommand = new SearchServicesListCommand(this, servicesService);
+            this.ShowCreateServiceViewCommand = new ShowCreateServiceViewCommand(carsService, navigator, viewModelFactory);
+            this.ShowEditServiceViewCommand = new ShowEditServiceViewCommand(this, servicesService, carsService, navigator, viewModelFactory);
+            this.ShowServiceDetailsViewCommand = new ShowServiceDetailsViewCommand(this, servicesService, navigator, viewModelFactory);
+            this.DeleteServiceCommand = new DeleteServiceCommand(this, servicesService);
         }
 
         #endregion Constructors

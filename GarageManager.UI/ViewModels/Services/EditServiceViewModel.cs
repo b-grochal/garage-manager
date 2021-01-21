@@ -1,7 +1,12 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Interfaces;
+using GarageManager.UI.Commands.Services;
+using GarageManager.UI.Infrastructure;
+using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
@@ -120,14 +125,16 @@ namespace GarageManager.UI.ViewModels
 
         #region Commands
 
+        public ICommand EditServiceCommand { get; }
+
         #endregion Commands
 
         #region Constructors
 
-        public EditServiceViewModel()
+        public EditServiceViewModel(IServicesService servicesService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            this.service = new Service();
             this.ErrorMessageViewModel = new MessageViewModel();
+            this.EditServiceCommand = new EditServiceCommand(this, servicesService, navigator, viewModelFactory);
         }
 
         #endregion Constructors
