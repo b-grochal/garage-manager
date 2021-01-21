@@ -4,9 +4,90 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GarageManager.UI.Views"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid Margin="10" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+            BorderBrush="{StaticResource PrimaryBlackBrush}"
+            BorderThickness="0 0 0 1"
+            Padding="0,10">
+            <TextBlock FontWeight="Bold" FontSize="20" Text="Create new service" />
+        </Border>
+        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Name: " Grid.Column="0" FontSize="15" Margin="0,0,5,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Description: " Grid.Column="0" FontSize="15" Margin="0,0,5,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Cost: " Grid.Column="0" FontSize="15" Margin="0,0,5,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Date: " Grid.Column="0" FontSize="15" Margin="0,0,5,0"/>
+                    <DatePicker Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{x:Static sys:DateTime.Now}" FontSize="15"/>
+                </Grid>
+
+                <Button Grid.Row="4" Margin="0,10" FontSize="15" Padding="5"
+                    Background="{StaticResource PrimaryBlackBrush}"
+                    Foreground="{StaticResource PrimarySilverBrush}"
+                    HorizontalAlignment="Center"
+                    Command="{Binding CreateCarCommand}"
+                    Content="Create service"
+                    IsDefault="True" />
+
+                <TextBlock Grid.Row="5" Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    DataContext="{Binding ErrorMessageViewModel}"
+                    Foreground="DarkRed"
+                    Text="{Binding Message}"
+                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
