@@ -75,7 +75,7 @@
                     Background="{StaticResource PrimaryBlackBrush}"
                     Foreground="{StaticResource PrimarySilverBrush}"
                     HorizontalAlignment="Center"
-                    Command="{Binding CreateCarCommand}"
+                    Command="{Binding EditServiceCommand}"
                     Content="Edit service"
                     IsDefault="True" />
 
