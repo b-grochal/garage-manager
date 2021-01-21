@@ -59,6 +59,22 @@
                 <views:EditCarView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:ServicesListViewModel}">
+                <views:ServicesListView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:CreateServiceViewModel}">
+                <views:CreateServiceView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ServiceDetailsViewModel}">
+                <views:ServiceDetailsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:EditServiceViewModel}">
+                <views:EditServiceView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
