@@ -6,21 +6,21 @@ namespace GarageManager.Services.Exceptions
 {
     public class UserNotFoundException : Exception
     {
-        public string UserName { get; set; }
+        public int UserId { get; set; }
 
-        public UserNotFoundException(string username)
+        public UserNotFoundException(int userId)
         {
-            UserName = username;
+            UserId = userId;
         }
 
-        public UserNotFoundException(string message, string username) : base(message)
+        public UserNotFoundException(string message, int userId) : base(message)
         {
-            UserName = username;
+            UserId = userId;
         }
 
-        public UserNotFoundException(string message, Exception innerException, string username) : base(message, innerException)
+        public UserNotFoundException(string message, Exception innerException, int userId) : base(message, innerException)
         {
-            UserName = username;
+            UserId = userId;
         }
     }
 }

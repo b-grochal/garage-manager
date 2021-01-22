@@ -12,6 +12,6 @@ namespace GarageManager.Services.Interfaces
         Task<IEnumerable<User>> GetUsers();
         Task<IEnumerable<User>> GetUsers(UsersListSearchCriteria usersListSearchCriteria);
         Task DeleteUser(int userId);
-        Task CreateUser(User user, string password, string confirmPassword);
+        Task CreateUser(User user, string password);
     }
 }

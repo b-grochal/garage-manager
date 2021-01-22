@@ -27,7 +27,7 @@ namespace GarageManager.UI.Commands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await usersService.CreateUser(createUserViewModel.User, createUserViewModel.Password, createUserViewModel.ConfirmPassword);
+            await usersService.CreateUser(createUserViewModel.User, createUserViewModel.Password);
             IEnumerable<User> users = await usersService.GetUsers();
             UsersListViewModel usersListViewModel = (UsersListViewModel)viewModelFactory.CreateViewModel(ViewType.UsersList);
             usersListViewModel.Users = users;

@@ -1,5 +1,6 @@
 ﻿using GarageManager.Data.Context;
 using GarageManager.Data.Entities;
+using GarageManager.Services.Exceptions;
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +24,7 @@ namespace GarageManager.Services.Implementation
             this.passwordHasher = passwordHasher;
         }
 
-        public async Task CreateUser(User user, string password, string confirmPassword)
+        public async Task CreateUser(User user, string password)
         {
             string passwordHash = passwordHasher.HashPassword(user, password);
             user.PasswordHash = passwordHash;
@@ -34,6 +35,12 @@ namespace GarageManager.Services.Implementation
         public async Task DeleteUser(int userId)
         {
             var user = context.Users.Find(userId);
+
+            if(user == null)
+            {
+                throw new UserNotFoundException(userId);
+            }
+
             context.Users.Remove(user);
             await context.SaveChangesAsync();
         }

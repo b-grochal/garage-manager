@@ -29,7 +29,7 @@ namespace GarageManager.Services.Implementation
 
             if (user == null)
             {
-                throw new UserNotFoundException(userName);
+                throw new InvalidUserNameException(userName);
             }
 
             PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
