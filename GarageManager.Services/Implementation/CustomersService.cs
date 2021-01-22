@@ -1,5 +1,6 @@
 ﻿using GarageManager.Data.Context;
 using GarageManager.Data.Entities;
+using GarageManager.Services.Exceptions;
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,12 @@ namespace GarageManager.Services.Implementation
         public async Task DeleteCustomer(int customerId)
         {
             var customer = await context.Customers.FindAsync(customerId);
+
+            if(customer == null)
+            {
+                throw new CustomerNotFoundException(customerId);
+            }
+
             context.Customers.Remove(customer);
             await context.SaveChangesAsync();
         }
@@ -42,6 +49,12 @@ namespace GarageManager.Services.Implementation
         public async Task<Customer> GetCustomer(int customerId)
         {
             var customer = await context.Customers.FindAsync(customerId);
+
+            if(customer == null)
+            {
+                throw new CustomerNotFoundException(customerId);
+            }
+
             return customer;
         }
 
