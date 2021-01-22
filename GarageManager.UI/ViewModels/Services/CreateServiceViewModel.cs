@@ -134,6 +134,7 @@ namespace GarageManager.UI.ViewModels
         public CreateServiceViewModel(IServicesService servicesService, INavigator navigator, IViewModelFactory viewModelFactory)
         {
             this.service = new Service();
+            this.Date = DateTime.Now;
             this.ErrorMessageViewModel = new MessageViewModel();
             this.CreateServiceCommand = new CreateServiceCommand(this, servicesService, navigator, viewModelFactory);
         }
