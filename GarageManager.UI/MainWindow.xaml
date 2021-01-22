@@ -34,21 +34,11 @@
                     <TextBlock Foreground="{StaticResource PrimarySilverBrush}" FontSize="24" Text="Garage Manager" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                 </Grid>
                 <StackPanel>
-                    <RadioButton Content="Home" 
-                                 Command="{Binding ShowHomePageCommand}"
-                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:HomeViewModel}}"/>
-                    <RadioButton Content="Users" 
-                                 Command="{Binding ShowUsersListCommand}"
-                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:UsersListViewModel}}"/>
-                    <RadioButton Content="Customers" 
-                                 Command="{Binding ShowCustomersListCommand}"
-                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:CustomersListViewModel}}"/>
-                    <RadioButton Content="Cars" 
-                                 Command="{Binding ShowCarsListCommand}"
-                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:CarsListViewModel}}"/>
-                    <RadioButton Content="Services" 
-                                 Command="{Binding ShowServicesListCommand}"
-                                 IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:ServicesListViewModel}}"/>
+                    <Button Content="Home" Command="{Binding ShowHomePageCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Users" Command="{Binding ShowUsersListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Customers" Command="{Binding ShowCustomersListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Cars" Command="{Binding ShowCarsListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Services" Command="{Binding ShowServicesListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
