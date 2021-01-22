@@ -21,7 +21,7 @@ namespace GarageManager.UI.HostBuilders
                 services.AddSingleton<IUsersService, UsersService>();
                 services.AddSingleton<ICustomersService, CustomersService>();
                 services.AddSingleton<ICarsService, CarsService>();
-                //services.AddSingleton<IStockPriceService, StockPriceService>();
+                services.AddSingleton<IServicesService, ServicesService>();
                 //services.AddSingleton<IBuyStockService, BuyStockService>();
                 //services.AddSingleton<ISellStockService, SellStockService>();
                 //services.AddSingleton<IMajorIndexService, MajorIndexService>();
