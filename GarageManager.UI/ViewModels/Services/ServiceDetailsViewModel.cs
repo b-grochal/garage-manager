@@ -47,7 +47,7 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.service.Cosr;
+                return this.service.Cost;
             }
         }
 

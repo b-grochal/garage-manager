@@ -69,11 +69,11 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.car.VIN;
+                return this.car.Vin;
             }
             set
             {
-                this.car.VIN = value;
+                this.car.Vin = value;
                 OnPropertyChanged(nameof(VIN));
             }
         }

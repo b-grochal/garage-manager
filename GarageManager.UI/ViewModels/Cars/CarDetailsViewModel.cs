@@ -48,7 +48,7 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.car.VIN;
+                return this.car.Vin;
             }
         }
 

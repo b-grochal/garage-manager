@@ -56,7 +56,7 @@ namespace GarageManager.Services.Implementation
 
             if (!string.IsNullOrEmpty(carsListSearchCriteria.VIN))
             {
-                queryable = queryable.Where(c => c.VIN.Equals(carsListSearchCriteria.VIN));
+                queryable = queryable.Where(c => c.Vin.Equals(carsListSearchCriteria.VIN));
             }
 
             return await queryable.ToListAsync();

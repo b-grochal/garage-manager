@@ -69,11 +69,11 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.service.Cosr;
+                return this.service.Cost;
             }
             set
             {
-                this.service.Cosr = value;
+                this.service.Cost = value;
                 OnPropertyChanged(nameof(Cost));
             }
         }
