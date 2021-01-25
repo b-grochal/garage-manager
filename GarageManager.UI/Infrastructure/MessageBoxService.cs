@@ -10,7 +10,7 @@ namespace GarageManager.UI.Infrastructure
         public bool ShowConfirmationMessageBox(string title, string content)
         {
             MessageBoxResult result = MessageBox.Show(content, title, MessageBoxButton.YesNo, MessageBoxImage.Question);
-            return result == MessageBoxResult.OK ? true : false;
+            return result == MessageBoxResult.Yes ? true : false;
         }
 
         public void ShowErrorMessageBox(string title, string content)

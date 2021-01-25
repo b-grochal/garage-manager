@@ -20,13 +20,14 @@ namespace GarageManager.UI.Commands.Cars
         {
             this.carsListViewModel = carsListViewModel;
             this.carsService = carsService;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
             try
             {
-                bool isDeleteOperationConfirmed = messageBoxService.ShowConfirmationMessageBox($"Are you sure you want to delete car {carsListViewModel.SelectedCar.Vin}?", "Delete car");
+                bool isDeleteOperationConfirmed = messageBoxService.ShowConfirmationMessageBox("Delete car", $"Are you sure you want to delete car {carsListViewModel.SelectedCar.Vin}?");
                 if(isDeleteOperationConfirmed)
                 {
                     await carsService.DeleteCar(carsListViewModel.SelectedCar.CarId);
