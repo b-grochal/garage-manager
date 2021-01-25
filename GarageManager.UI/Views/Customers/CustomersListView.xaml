@@ -66,8 +66,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" FontSize="20" Margin="0,0,5,0"/>
-                        <TextBlock Text="{Binding LastName}" FontWeight="Bold" FontSize="20"/>
+                        <TextBlock Text="{Binding FullName}" FontWeight="Bold" FontSize="20" />
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

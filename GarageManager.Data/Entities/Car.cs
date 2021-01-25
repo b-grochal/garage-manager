@@ -22,7 +22,7 @@ namespace GarageManager.Data.Entities
         {
             get
             {
-                return $"{this.Brand} {this.Model}";
+                return $"{this.Brand} {this.Model} - {this.Vin}";
             }
         }
     }
