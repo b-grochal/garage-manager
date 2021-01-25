@@ -2,6 +2,7 @@
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
 using GarageManager.UI.Commands;
+using GarageManager.UI.Commands.Users;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
 using System;
@@ -79,6 +80,7 @@ namespace GarageManager.UI.ViewModels
         public ICommand SearchUsersListCommand { get; }
         public ICommand ShowCreateUserViewCommand { get; }
         public ICommand DeleteUserCommand { get; }
+        public ICommand ResetUsersListSearchCriteriaCommand { get; }
 
         #endregion Commands
 
@@ -90,6 +92,7 @@ namespace GarageManager.UI.ViewModels
             this.SearchUsersListCommand = new SearchUsersListCommand(this, usersService);
             this.ShowCreateUserViewCommand = new ShowCreateUserViewCommand(navigator, viewModelFactory);
             this.DeleteUserCommand = new DeleteUserCommand(this, usersService);
+            this.ResetUsersListSearchCriteriaCommand = new ResetUsersListSearchCriteriaCommand(this, usersService);
         }
 
         #endregion Constructors

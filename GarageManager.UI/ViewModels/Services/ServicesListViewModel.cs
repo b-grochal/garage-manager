@@ -79,6 +79,7 @@ namespace GarageManager.UI.ViewModels
         public ICommand ShowEditServiceViewCommand { get; }
         public ICommand ShowServiceDetailsViewCommand { get; }
         public ICommand DeleteServiceCommand { get; }
+        public ICommand ResetServicesListSearchCriteriaCommand { get; }
 
         #endregion Commands
 
@@ -92,6 +93,7 @@ namespace GarageManager.UI.ViewModels
             this.ShowEditServiceViewCommand = new ShowEditServiceViewCommand(this, servicesService, carsService, navigator, viewModelFactory);
             this.ShowServiceDetailsViewCommand = new ShowServiceDetailsViewCommand(this, servicesService, navigator, viewModelFactory);
             this.DeleteServiceCommand = new DeleteServiceCommand(this, servicesService);
+            this.ResetServicesListSearchCriteriaCommand = new ResetServicesListSearchCriteriaCommand(this, servicesService);
         }
 
         #endregion Constructors

@@ -2,6 +2,7 @@
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
 using GarageManager.UI.Commands;
+using GarageManager.UI.Commands.Customers;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
 using System;
@@ -93,6 +94,7 @@ namespace GarageManager.UI.ViewModels
         public ICommand ShowEditCustomerViewCommand { get; }
         public ICommand ShowCustomerDetailsViewCommand { get; }
         public ICommand DeleteCustomerCommand { get; }
+        public ICommand ResetCustomersListSearchCriteria { get; }
 
         #endregion Commands
 
@@ -106,6 +108,7 @@ namespace GarageManager.UI.ViewModels
             this.ShowEditCustomerViewCommand = new ShowEditCustomerViewCommand(this, customersService, navigator, viewModelFactory);
             this.ShowCustomerDetailsViewCommand = new ShowCustomerDetailsViewCommand(this, customersService, navigator, viewModelFactory);
             this.DeleteCustomerCommand = new DeleteCustomerCommand(this, customersService);
+            this.ResetCustomersListSearchCriteria = new ResetCustomersListSearchCriteriaCommand(this, customersService);
         }
 
         #endregion Constructors
