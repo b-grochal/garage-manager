@@ -35,11 +35,11 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.carsListSearchCriteria.VIN;
+                return this.carsListSearchCriteria.Vin;
             }
             set
             {
-                this.carsListSearchCriteria.VIN = value;
+                this.carsListSearchCriteria.Vin = value;
                 OnPropertyChanged(nameof(VinSearchCriteria));
             }
         }
