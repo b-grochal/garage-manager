@@ -17,5 +17,13 @@ namespace GarageManager.Data.Entities
         public string Transmission { get; set; }
         public Customer Customer { get; set; }
         public ICollection<Service> Services{ get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return $"{this.Brand} {this.Model}";
+            }
+        }
     }
 }
