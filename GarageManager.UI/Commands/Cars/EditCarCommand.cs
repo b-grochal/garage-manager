@@ -27,12 +27,20 @@ namespace GarageManager.UI.Commands.Cars
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await carsService.EditCar(editCarViewModel.Car);
-            IEnumerable<Car> cars = await carsService.GetCars();
-            CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
-            carsListViewModel.Cars = cars;
-            navigator.CurrentViewModel = carsListViewModel;
+            editCarViewModel.ErrorMessage = string.Empty;
 
+            try
+            {
+                await carsService.EditCar(editCarViewModel.Car);
+                IEnumerable<Car> cars = await carsService.GetCars();
+                CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
+                carsListViewModel.Cars = cars;
+                navigator.CurrentViewModel = carsListViewModel;
+            }
+            catch (Exception)
+            {
+                editCarViewModel.ErrorMessage = "Failed to edit car.";
+            }
         }
     }
 }

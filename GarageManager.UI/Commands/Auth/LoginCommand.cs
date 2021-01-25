@@ -14,43 +14,43 @@ namespace GarageManager.UI.Commands
 {
     public class LoginCommand : BaseAsyncCommand
     {
-        private readonly LoginViewModel _loginViewModel;
-        private readonly IAuthService _authService;
-        private readonly IAuthenticator _authenticator;
-        private readonly INavigator _navigator;
-        private readonly IViewModelFactory _viewModelFactory;
+        private readonly LoginViewModel loginViewModel;
+        private readonly IAuthService authService;
+        private readonly IAuthenticator authenticator;
+        private readonly INavigator navigator;
+        private readonly IViewModelFactory viewModelFactory;
 
         public LoginCommand(LoginViewModel loginViewModel, IAuthService auhtService, IAuthenticator authenticator, INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            this._loginViewModel = loginViewModel;
-            this._authService = auhtService;
-            this._authenticator = authenticator;
-            this._navigator = navigator;
-            this._viewModelFactory = viewModelFactory;
+            this.loginViewModel = loginViewModel;
+            this.authService = auhtService;
+            this.authenticator = authenticator;
+            this.navigator = navigator;
+            this.viewModelFactory = viewModelFactory;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            _loginViewModel.ErrorMessage = string.Empty;
+            loginViewModel.ErrorMessage = string.Empty;
 
             try
             {
-                var user = await _authService.Login(_loginViewModel.UserName, _loginViewModel.Password);
-                _authenticator.Login(user);
-                var homeViewModel = _viewModelFactory.CreateViewModel(ViewType.Home);
-                _navigator.CurrentViewModel = homeViewModel;
+                var user = await authService.Login(loginViewModel.UserName, loginViewModel.Password);
+                authenticator.Login(user);
+                var homeViewModel = viewModelFactory.CreateViewModel(ViewType.Home);
+                navigator.CurrentViewModel = homeViewModel;
             }
             catch (InvalidUserNameException ex)
             {
-                _loginViewModel.ErrorMessage = $"{ex.UserName} does not exist.";
+                loginViewModel.ErrorMessage = $"{ex.UserName} does not exist.";
             }
             catch (InvalidPasswordException)
             {
-                _loginViewModel.ErrorMessage = "Incorrect password.";
+                loginViewModel.ErrorMessage = "Incorrect password.";
             }
             catch (Exception)
             {
-                _loginViewModel.ErrorMessage = "Login failed.";
+                loginViewModel.ErrorMessage = "Login failed.";
             }
         }
     }

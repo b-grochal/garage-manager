@@ -1,5 +1,6 @@
 ﻿using GarageManager.Data.Entities;
 using GarageManager.Services.Interfaces;
+using GarageManager.UI.Infrastructure;
 using GarageManager.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,27 @@ namespace GarageManager.UI.Commands.Cars
     {
         private readonly CarsListViewModel carsListViewModel;
         private readonly ICarsService carsService;
+        private readonly IMessageBoxService messageBoxService;
 
-        public SearchCarsListCommand(CarsListViewModel carsListViewModel, ICarsService carsService)
+        public SearchCarsListCommand(CarsListViewModel carsListViewModel, ICarsService carsService, IMessageBoxService messageBoxService)
         {
             this.carsListViewModel = carsListViewModel;
             this.carsService = carsService;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            IEnumerable<Car> filteredCars = await carsService.GetCars(carsListViewModel.CarsListSearchCriteria);
-            carsListViewModel.Cars = filteredCars;
+            try
+            {
+                IEnumerable<Car> filteredCars = await carsService.GetCars(carsListViewModel.CarsListSearchCriteria);
+                carsListViewModel.Cars = filteredCars;
+            }
+            catch (Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("An unknown error occurred.", "Error");
+            }
+            
         }
     }
 }

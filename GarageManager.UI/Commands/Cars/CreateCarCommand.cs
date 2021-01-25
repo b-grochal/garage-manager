@@ -27,11 +27,21 @@ namespace GarageManager.UI.Commands.Cars
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await carsService.CreateCar(createCarViewModel.Car);
-            IEnumerable<Car> cars = await carsService.GetCars();
-            CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
-            carsListViewModel.Cars = cars;
-            navigator.CurrentViewModel = carsListViewModel;
+            createCarViewModel.ErrorMessage = string.Empty;
+
+            try
+            {
+                await carsService.CreateCar(createCarViewModel.Car);
+                IEnumerable<Car> cars = await carsService.GetCars();
+                CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
+                carsListViewModel.Cars = cars;
+                navigator.CurrentViewModel = carsListViewModel;
+            }
+            catch (Exception)
+            {
+                createCarViewModel.ErrorMessage = "Failed to create user.";
+            }
+            
         }
     }
 }
