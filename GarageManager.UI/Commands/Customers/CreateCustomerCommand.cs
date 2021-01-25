@@ -16,22 +16,34 @@ namespace GarageManager.UI.Commands
         private readonly ICustomersService customersService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public CreateCustomerCommand(CreateCustomerViewModel createCustomerViewModel, ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public CreateCustomerCommand(CreateCustomerViewModel createCustomerViewModel, ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.createCustomerViewModel = createCustomerViewModel;
             this.customersService = customersService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await customersService.CreateCustomer(createCustomerViewModel.Customer);
-            IEnumerable<Customer> customers = await customersService.GetCustomers();
-            CustomersListViewModel customersListViewModel = (CustomersListViewModel)viewModelFactory.CreateViewModel(ViewType.CustomersList);
-            customersListViewModel.Customers = customers;
-            navigator.CurrentViewModel = customersListViewModel;
+            createCustomerViewModel.ErrorMessage = string.Empty;
+
+            try
+            {
+                await customersService.CreateCustomer(createCustomerViewModel.Customer);
+                IEnumerable<Customer> customers = await customersService.GetCustomers();
+                CustomersListViewModel customersListViewModel = (CustomersListViewModel)viewModelFactory.CreateViewModel(ViewType.CustomersList);
+                customersListViewModel.Customers = customers;
+                navigator.CurrentViewModel = customersListViewModel;
+                messageBoxService.ShowInformationMessageBox("Create customer", "Customer was successfullt created.");
+            }
+            catch (Exception)
+            {
+                createCustomerViewModel.ErrorMessage = "Failed to create customer";
+            }
         }
     }
 }

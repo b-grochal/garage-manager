@@ -38,7 +38,7 @@ namespace GarageManager.UI.Commands.Cars
                 CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
                 carsListViewModel.Cars = cars;
                 navigator.CurrentViewModel = carsListViewModel;
-                messageBoxService.ShowInformationMessageBox("Delete car", "Car was successfully edited.");
+                messageBoxService.ShowInformationMessageBox("Edit car", "Car was successfully edited.");
             }
             catch (Exception)
             {

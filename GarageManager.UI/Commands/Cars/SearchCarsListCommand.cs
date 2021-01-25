@@ -33,7 +33,6 @@ namespace GarageManager.UI.Commands.Cars
             {
                 messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
             }
-            
         }
     }
 }
