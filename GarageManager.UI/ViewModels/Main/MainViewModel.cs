@@ -36,7 +36,8 @@ namespace GarageManager.UI.ViewModels
             IUsersService usersSerivce, 
             ICustomersService customersService, 
             ICarsService carsService,
-            IServicesService servicesService)
+            IServicesService servicesService,
+            IMessageBoxService messageBoxService)
         {
             this._viewModelFactory = viewModelFactory;
             this._authenticator = authenticator;
@@ -47,7 +48,7 @@ namespace GarageManager.UI.ViewModels
             this.ShowHomePageCommand = new ShowHomeViewCommand(navigator, viewModelFactory);
             this.ShowUsersListCommand = new ShowUsersListCommand(usersSerivce, navigator, viewModelFactory);
             this.ShowCustomersListCommand = new ShowCustomersListCommand(customersService, navigator, viewModelFactory);
-            this.ShowCarsListCommand = new ShowCarsListCommand(carsService, navigator, viewModelFactory);
+            this.ShowCarsListCommand = new ShowCarsListCommand(carsService, navigator, viewModelFactory, messageBoxService);
             this.ShowServicesListCommand = new ShowServicesListCommand(servicesService, navigator, viewModelFactory);
 
             _navigator.StateChanged += Navigator_StateChanged;

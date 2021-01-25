@@ -85,15 +85,15 @@ namespace GarageManager.UI.ViewModels
 
         #region Constructors
 
-        public CarsListViewModel(ICarsService carsService, ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public CarsListViewModel(ICarsService carsService, ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.carsListSearchCriteria = new CarsListSearchCriteria();
-            this.SearchCarsListCommand = new SearchCarsListCommand(this, carsService);
-            this.ShowCreateCarViewCommand = new ShowCreateCarViewCommand(customersService, navigator, viewModelFactory);
-            this.ShowEditCarViewCommand = new ShowEditCarViewCommand(this, carsService, customersService, navigator, viewModelFactory);
-            this.ShowCarDetailsViewCommand = new ShowCarDetialsViewCommand(this, carsService, navigator, viewModelFactory);
-            this.DeleteCarCommand = new DeleteCarCommand(this, carsService);
-            this.ResetCarsListSearchCriteriaCommand = new ResetCarsListSearchCriteriaCommand(this, carsService);
+            this.SearchCarsListCommand = new SearchCarsListCommand(this, carsService, messageBoxService);
+            this.ShowCreateCarViewCommand = new ShowCreateCarViewCommand(customersService, navigator, viewModelFactory, messageBoxService);
+            this.ShowEditCarViewCommand = new ShowEditCarViewCommand(this, carsService, customersService, navigator, viewModelFactory, messageBoxService);
+            this.ShowCarDetailsViewCommand = new ShowCarDetialsViewCommand(this, carsService, navigator, viewModelFactory, messageBoxService);
+            this.DeleteCarCommand = new DeleteCarCommand(this, carsService, messageBoxService);
+            this.ResetCarsListSearchCriteriaCommand = new ResetCarsListSearchCriteriaCommand(this, carsService, messageBoxService);
 
         }
 
