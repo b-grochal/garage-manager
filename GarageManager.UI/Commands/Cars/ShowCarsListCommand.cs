@@ -36,7 +36,7 @@ namespace GarageManager.UI.Commands.Cars
             }
             catch (Exception)
             {
-                messageBoxService.ShowErrorMessageBox("An unknown error occurred.", "Error");
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
             }
             
         }

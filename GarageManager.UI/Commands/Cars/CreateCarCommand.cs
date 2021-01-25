@@ -16,13 +16,15 @@ namespace GarageManager.UI.Commands.Cars
         private readonly ICarsService carsService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public CreateCarCommand(CreateCarViewModel createCarViewModel, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public CreateCarCommand(CreateCarViewModel createCarViewModel, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.createCarViewModel = createCarViewModel;
             this.carsService = carsService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
@@ -36,6 +38,7 @@ namespace GarageManager.UI.Commands.Cars
                 CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
                 carsListViewModel.Cars = cars;
                 navigator.CurrentViewModel = carsListViewModel;
+                messageBoxService.ShowInformationMessageBox("Create car", "Car was successfully created.");
             }
             catch (Exception)
             {

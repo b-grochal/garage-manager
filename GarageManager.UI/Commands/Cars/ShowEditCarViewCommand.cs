@@ -43,11 +43,11 @@ namespace GarageManager.UI.Commands.Cars
             }
             catch (CarNotFoundException ex)
             {
-                messageBoxService.ShowErrorMessageBox($"Selected car with ID: {ex.CarId} not found.", "Error");
+                messageBoxService.ShowErrorMessageBox("Error", $"Selected car with ID: {ex.CarId} not found.");
             }
             catch (Exception)
             {
-                messageBoxService.ShowErrorMessageBox("An unknown error occurred.", "Error");
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
             }
         }
 

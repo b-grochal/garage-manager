@@ -33,16 +33,16 @@ namespace GarageManager.UI.Commands.Cars
                     await carsService.DeleteCar(carsListViewModel.SelectedCar.CarId);
                     IEnumerable<Car> cars = await carsService.GetCars();
                     carsListViewModel.Cars = cars;
-                    messageBoxService.ShowInformationMessageBox("Car was successfully deleted.", "Delete car");
+                    messageBoxService.ShowInformationMessageBox("Delete car", "Car was successfully deleted.");
                 }
             }
             catch (CarNotFoundException ex)
             {
-                messageBoxService.ShowErrorMessageBox($"Selected car with ID: {ex.CarId} not found.", "Error");
+                messageBoxService.ShowErrorMessageBox("Error", $"Selected car with ID: {ex.CarId} not found.");
             }
             catch (Exception)
             {
-                messageBoxService.ShowErrorMessageBox("Failed to delete car.", "Error");
+                messageBoxService.ShowErrorMessageBox("Error", "Failed to delete car.");
             }
         }
 
