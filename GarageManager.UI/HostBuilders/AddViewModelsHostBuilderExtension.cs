@@ -116,7 +116,8 @@ namespace GarageManager.UI.HostBuilders
                 serviceProvider.GetRequiredService<ICarsService>(),
                 serviceProvider.GetRequiredService<ICustomersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CreateCarViewModel CreateCreateCarViewModel(IServiceProvider serviceProvider)
