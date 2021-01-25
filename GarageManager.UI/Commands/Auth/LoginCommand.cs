@@ -1,4 +1,5 @@
-﻿using GarageManager.Services.Implementation;
+﻿using GarageManager.Services.Exceptions;
+using GarageManager.Services.Implementation;
 using GarageManager.Services.Interfaces;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Authenticator;
@@ -39,15 +40,15 @@ namespace GarageManager.UI.Commands
                 var homeViewModel = _viewModelFactory.CreateViewModel(ViewType.Home);
                 _navigator.CurrentViewModel = homeViewModel;
             }
-            //catch (UserNotFoundException)
-            //{
-            //    _loginViewModel.ErrorMessage = "Username does not exist.";
-            //}
-            //catch (InvalidPasswordException)
-            //{
-            //    _loginViewModel.ErrorMessage = "Incorrect password.";
-            //}
-            catch (Exception e)
+            catch (InvalidUserNameException ex)
+            {
+                _loginViewModel.ErrorMessage = $"{ex.UserName} does not exist.";
+            }
+            catch (InvalidPasswordException)
+            {
+                _loginViewModel.ErrorMessage = "Incorrect password.";
+            }
+            catch (Exception)
             {
                 _loginViewModel.ErrorMessage = "Login failed.";
             }
