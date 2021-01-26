@@ -45,5 +45,10 @@ namespace GarageManager.UI.Commands
                 createCustomerViewModel.ErrorMessage = "Failed to create customer";
             }
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && createCustomerViewModel.IsDataValid;
+        }
     }
 }
