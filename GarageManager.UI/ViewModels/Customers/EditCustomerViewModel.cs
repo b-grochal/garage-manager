@@ -104,9 +104,9 @@ namespace GarageManager.UI.ViewModels
 
         #region Constructors
 
-        public EditCustomerViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public EditCustomerViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
-            this.EditCustomerCommand = new EditCustomerCommand(this, customersService, navigator, viewModelFactory);
+            this.EditCustomerCommand = new EditCustomerCommand(this, customersService, navigator, viewModelFactory, messageBoxService);
             this.ErrorMessageViewModel = new MessageViewModel();
         }
 

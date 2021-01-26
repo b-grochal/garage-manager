@@ -169,10 +169,10 @@ namespace GarageManager.UI.ViewModels
 
         #region Constructors
 
-        public EditCarViewModel(ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public EditCarViewModel(ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.ErrorMessageViewModel = new MessageViewModel();
-            this.EditCarCommand = new EditCarCommand(this, carsService, navigator, viewModelFactory);
+            this.EditCarCommand = new EditCarCommand(this, carsService, navigator, viewModelFactory, messageBoxService);
         }
 
         #endregion Constructors

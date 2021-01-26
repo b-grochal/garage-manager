@@ -86,13 +86,13 @@ namespace GarageManager.UI.ViewModels
 
         #region Constructors
 
-        public UsersListViewModel(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public UsersListViewModel(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.usersListSearchCriteria = new UsersListSearchCriteria();
-            this.SearchUsersListCommand = new SearchUsersListCommand(this, usersService);
-            this.ShowCreateUserViewCommand = new ShowCreateUserViewCommand(navigator, viewModelFactory);
-            this.DeleteUserCommand = new DeleteUserCommand(this, usersService);
-            this.ResetUsersListSearchCriteriaCommand = new ResetUsersListSearchCriteriaCommand(this, usersService);
+            this.SearchUsersListCommand = new SearchUsersListCommand(this, usersService, messageBoxService);
+            this.ShowCreateUserViewCommand = new ShowCreateUserViewCommand(navigator, viewModelFactory, messageBoxService);
+            this.DeleteUserCommand = new DeleteUserCommand(this, usersService, messageBoxService);
+            this.ResetUsersListSearchCriteriaCommand = new ResetUsersListSearchCriteriaCommand(this, usersService, messageBoxService);
         }
 
         #endregion Constructors

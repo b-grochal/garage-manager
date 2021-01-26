@@ -70,7 +70,8 @@ namespace GarageManager.UI.HostBuilders
             return new UsersListViewModel(
                 serviceProvider.GetRequiredService<IUsersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CreateUserViewModel CreateCreateUserViewModel(IServiceProvider serviceProvider)
@@ -78,7 +79,8 @@ namespace GarageManager.UI.HostBuilders
             return new CreateUserViewModel(
                 serviceProvider.GetRequiredService<IUsersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CustomersListViewModel CreateCustomersListViewModel(IServiceProvider serviceProvider)
@@ -86,7 +88,8 @@ namespace GarageManager.UI.HostBuilders
             return new CustomersListViewModel(
                 serviceProvider.GetRequiredService<ICustomersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CreateCustomerViewModel CreateCreateCustomerViewModel(IServiceProvider serviceProvider)
@@ -94,7 +97,8 @@ namespace GarageManager.UI.HostBuilders
             return new CreateCustomerViewModel(
                 serviceProvider.GetRequiredService<ICustomersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static EditCustomerViewModel CreateEditCustomerViewModel(IServiceProvider serviceProvider)
@@ -102,7 +106,8 @@ namespace GarageManager.UI.HostBuilders
             return new EditCustomerViewModel(
                 serviceProvider.GetRequiredService<ICustomersService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CustomerDetailsViewModel CreateCustomerDetailsViewModel(IServiceProvider serviceProvider)
@@ -125,7 +130,8 @@ namespace GarageManager.UI.HostBuilders
             return new CreateCarViewModel(
                 serviceProvider.GetRequiredService<ICarsService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static EditCarViewModel CreateEditCarViewModel(IServiceProvider serviceProvider)
@@ -133,7 +139,8 @@ namespace GarageManager.UI.HostBuilders
             return new EditCarViewModel(
                 serviceProvider.GetRequiredService<ICarsService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CarDetailsViewModel CreateCarDetailsViewModel(IServiceProvider serviceProvider)
@@ -147,7 +154,8 @@ namespace GarageManager.UI.HostBuilders
                 serviceProvider.GetRequiredService<IServicesService>(),
                 serviceProvider.GetRequiredService<ICarsService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static CreateServiceViewModel CreateCreateServiceViewModel(IServiceProvider serviceProvider)
@@ -155,7 +163,8 @@ namespace GarageManager.UI.HostBuilders
             return new CreateServiceViewModel(
                 serviceProvider.GetRequiredService<IServicesService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static EditServiceViewModel CreateEditServiceViewModel(IServiceProvider serviceProvider)
@@ -163,7 +172,8 @@ namespace GarageManager.UI.HostBuilders
             return new EditServiceViewModel(
                 serviceProvider.GetRequiredService<IServicesService>(),
                 serviceProvider.GetRequiredService<INavigator>(),
-                serviceProvider.GetRequiredService<IViewModelFactory>());
+                serviceProvider.GetRequiredService<IViewModelFactory>(),
+                serviceProvider.GetRequiredService<IMessageBoxService>());
         }
 
         private static ServiceDetailsViewModel CreateServiceDetailsViewModel(IServiceProvider serviceProvider)

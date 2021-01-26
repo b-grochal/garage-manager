@@ -131,12 +131,12 @@ namespace GarageManager.UI.ViewModels
 
         #region Constructors
 
-        public CreateServiceViewModel(IServicesService servicesService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public CreateServiceViewModel(IServicesService servicesService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.service = new Service();
             this.Date = DateTime.Now;
             this.ErrorMessageViewModel = new MessageViewModel();
-            this.CreateServiceCommand = new CreateServiceCommand(this, servicesService, navigator, viewModelFactory);
+            this.CreateServiceCommand = new CreateServiceCommand(this, servicesService, navigator, viewModelFactory, messageBoxService);
         }
 
         #endregion Constructors
