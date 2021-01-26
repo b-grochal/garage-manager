@@ -96,17 +96,11 @@ namespace GarageManager.UI.ViewModels
             set => ErrorMessageViewModel.Message = value;
         }
 
-        #endregion Properties
-
-        #region Commands
-
-        public ICommand CreateCustomerCommand { get; }
-
         public string Error => throw new NotImplementedException();
 
-        public Dictionary<string, string> DataErrorsCollection 
+        public Dictionary<string, string> DataErrorsCollection
         {
-            get 
+            get
             {
                 return this.dataErrorsDictionary;
             }
@@ -120,9 +114,9 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                foreach(KeyValuePair<string, string> item in dataErrorsDictionary)
+                foreach (KeyValuePair<string, string> item in dataErrorsDictionary)
                 {
-                    if(item.Value != null)
+                    if (item.Value != null)
                     {
                         return false;
                     }
@@ -131,13 +125,17 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        #endregion Properties
+
+        #region Indexers
+
         public string this[string propertyName]
         {
             get
             {
                 string result = null;
 
-                switch(propertyName)
+                switch (propertyName)
                 {
                     case nameof(FirstName):
                         if (string.IsNullOrWhiteSpace(FirstName))
@@ -166,6 +164,12 @@ namespace GarageManager.UI.ViewModels
                 return result;
             }
         }
+
+        #endregion Indexers
+
+        #region Commands
+
+        public ICommand CreateCustomerCommand { get; }
 
         #endregion Commands
 
