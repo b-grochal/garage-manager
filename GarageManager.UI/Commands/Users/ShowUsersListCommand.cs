@@ -16,20 +16,29 @@ namespace GarageManager.UI.Commands
         private readonly IUsersService usersService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public ShowUsersListCommand(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public ShowUsersListCommand(IUsersService usersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.usersService = usersService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            var users = await usersService.GetUsers();
-            UsersListViewModel usersListViewModel = (UsersListViewModel)viewModelFactory.CreateViewModel(ViewType.UsersList);
-            usersListViewModel.Users = new ObservableCollection<User>(users);
-            navigator.CurrentViewModel = usersListViewModel;
+            try
+            {
+                var users = await usersService.GetUsers();
+                UsersListViewModel usersListViewModel = (UsersListViewModel)viewModelFactory.CreateViewModel(ViewType.UsersList);
+                usersListViewModel.Users = new ObservableCollection<User>(users);
+                navigator.CurrentViewModel = usersListViewModel;
+            }
+            catch (Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
+            }
         }
     }
 }
