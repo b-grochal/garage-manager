@@ -59,7 +59,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Cost: " Grid.Column="0" FontSize="15" Margin="0,0,5,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                    <TextBox Grid.Column="1" Text="{Binding Cost, UpdateSourceTrigger=LostFocus}" PreviewTextInput="CostPreviewTextInput" FontSize="15"/>
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="0,5">

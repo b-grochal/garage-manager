@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +22,11 @@ namespace GarageManager.UI.Views
         public EditServiceView()
         {
             InitializeComponent();
+        }
+
+        private void CostPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, "^[1-9.,]+$");
         }
     }
 }
