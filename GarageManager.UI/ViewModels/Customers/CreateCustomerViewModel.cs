@@ -98,7 +98,7 @@ namespace GarageManager.UI.ViewModels
 
         public string Error => throw new NotImplementedException();
 
-        public Dictionary<string, string> DataErrorsCollection
+        public Dictionary<string, string> DataErrorsDictionary
         {
             get
             {
@@ -155,12 +155,12 @@ namespace GarageManager.UI.ViewModels
                         break;
                 }
 
-                if (DataErrorsCollection.ContainsKey(propertyName))
-                    DataErrorsCollection[propertyName] = result;
+                if (DataErrorsDictionary.ContainsKey(propertyName))
+                    DataErrorsDictionary[propertyName] = result;
                 else
-                    DataErrorsCollection.Add(propertyName, result);
+                    DataErrorsDictionary.Add(propertyName, result);
 
-                OnPropertyChanged(nameof(DataErrorsCollection));
+                OnPropertyChanged(nameof(DataErrorsDictionary));
                 return result;
             }
         }
@@ -177,7 +177,7 @@ namespace GarageManager.UI.ViewModels
 
         public CreateCustomerViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
-            this.DataErrorsCollection = new Dictionary<string, string>();
+            this.DataErrorsDictionary = new Dictionary<string, string>();
             this.Customer = new Customer();
             this.CreateCustomerCommand = new CreateCustomerCommand(this, customersService, navigator, viewModelFactory, messageBoxService);
             this.ErrorMessageViewModel = new MessageViewModel();

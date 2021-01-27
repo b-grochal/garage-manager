@@ -43,5 +43,10 @@ namespace GarageManager.UI.Commands
                 createUserViewModel.ErrorMessage = "Failed to create user.";
             }
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && createUserViewModel.IsDataValid;
+        }
     }
 }
