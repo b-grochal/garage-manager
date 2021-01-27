@@ -59,6 +59,14 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        public string Vin
+        {
+            get
+            {
+                return this.service.Car.Vin;
+            }
+        }
+
         #endregion Properties
 
         #region Constructors

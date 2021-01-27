@@ -84,6 +84,14 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
+        public string Owner
+        {
+            get
+            {
+                return this.car.Customer.FullName;
+            }
+        }
+
         public IEnumerable<Service> CarServices
         {
             get
