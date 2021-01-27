@@ -45,5 +45,10 @@ namespace GarageManager.UI.Commands.Services
                 editServiceViewModel.ErrorMessage = "Failed to edit service.";
             }
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && editServiceViewModel.IsDataValid;
+        }
     }
 }
