@@ -45,5 +45,10 @@ namespace GarageManager.UI.Commands.Cars
                 editCarViewModel.ErrorMessage = "Failed to edit car.";
             }
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && editCarViewModel.IsDataValid;
+        }
     }
 }

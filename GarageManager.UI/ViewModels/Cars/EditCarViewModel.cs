@@ -5,17 +5,19 @@ using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
-    public class EditCarViewModel : BaseViewModel
+    public class EditCarViewModel : BaseViewModel, IDataErrorInfo
     {
         #region Fields
 
         private Car car;
         private IEnumerable<Customer> customers;
+        private IDictionary<string, string> dataErrorsDictionary;
 
         #endregion Fields
 
@@ -65,7 +67,7 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
-        public string VIN
+        public string Vin
         {
             get
             {
@@ -74,7 +76,7 @@ namespace GarageManager.UI.ViewModels
             set
             {
                 this.car.Vin = value;
-                OnPropertyChanged(nameof(VIN));
+                OnPropertyChanged(nameof(Vin));
             }
         }
 
@@ -159,7 +161,92 @@ namespace GarageManager.UI.ViewModels
             set => ErrorMessageViewModel.Message = value;
         }
 
+        public string Error => throw new NotImplementedException();
+
+        public IDictionary<string, string> DataErrorsDictionary
+        {
+            get
+            {
+                return this.dataErrorsDictionary;
+            }
+            private set
+            {
+                this.dataErrorsDictionary = value;
+            }
+        }
+
+        public bool IsDataValid
+        {
+            get
+            {
+                foreach (KeyValuePair<string, string> item in dataErrorsDictionary)
+                {
+                    if (item.Value != null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
         #endregion Properties
+
+        #region Indexers
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                string result = null;
+
+                switch (propertyName)
+                {
+                    case nameof(Brand):
+                        if (string.IsNullOrWhiteSpace(Brand))
+                            result = "Brand cannot be empty.";
+                        break;
+                    case nameof(Model):
+                        if (string.IsNullOrWhiteSpace(Model))
+                            result = "Model cannot be empty.";
+                        break;
+                    case nameof(Vin):
+                        if (string.IsNullOrWhiteSpace(Vin))
+                            result = "VIN cannot be empty.";
+                        break;
+                    case nameof(RegistrationNumber):
+                        if (string.IsNullOrWhiteSpace(RegistrationNumber))
+                            result = "Registration number cannot be empty.";
+                        break;
+                    case nameof(FuelType):
+                        if (string.IsNullOrWhiteSpace(FuelType))
+                            result = "Fuel type cannot be empty.";
+                        break;
+                    case nameof(Engine):
+                        if (string.IsNullOrWhiteSpace(Engine))
+                            result = "Engine cannot be empty.";
+                        break;
+                    case nameof(Transmission):
+                        if (string.IsNullOrWhiteSpace(Transmission))
+                            result = "Transmission cannot be empty.";
+                        break;
+                    case nameof(CustomerId):
+                        if (CustomerId == 0)
+                            result = "Customer has to be selected.";
+                        break;
+                }
+
+                if (DataErrorsDictionary.ContainsKey(propertyName))
+                    DataErrorsDictionary[propertyName] = result;
+                else
+                    DataErrorsDictionary.Add(propertyName, result);
+
+                OnPropertyChanged(nameof(DataErrorsDictionary));
+                return result;
+            }
+        }
+
+        #endregion Indexers
 
         #region Commands
 
@@ -171,6 +258,7 @@ namespace GarageManager.UI.ViewModels
 
         public EditCarViewModel(ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
+            this.DataErrorsDictionary = new Dictionary<string, string>();
             this.ErrorMessageViewModel = new MessageViewModel();
             this.EditCarCommand = new EditCarCommand(this, carsService, navigator, viewModelFactory, messageBoxService);
         }

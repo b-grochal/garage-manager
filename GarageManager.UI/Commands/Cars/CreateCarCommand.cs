@@ -46,5 +46,10 @@ namespace GarageManager.UI.Commands.Cars
             }
             
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && createCarViewModel.IsDataValid;
+        }
     }
 }

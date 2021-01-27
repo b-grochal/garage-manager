@@ -212,7 +212,7 @@ namespace GarageManager.UI.ViewModels
                         break;
                     case nameof(Vin):
                         if (string.IsNullOrWhiteSpace(Vin))
-                            result = "Vin cannot be empty.";
+                            result = "VIN cannot be empty.";
                         break;
                     case nameof(RegistrationNumber):
                         if (string.IsNullOrWhiteSpace(RegistrationNumber))
