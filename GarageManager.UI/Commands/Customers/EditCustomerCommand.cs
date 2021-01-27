@@ -45,5 +45,10 @@ namespace GarageManager.UI.Commands
                 editCustomerViewModel.ErrorMessage = "Failed to edit customer.";
             }
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && editCustomerViewModel.IsDataValid;
+        }
     }
 }

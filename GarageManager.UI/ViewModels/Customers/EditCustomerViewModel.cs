@@ -5,16 +5,18 @@ using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 
 namespace GarageManager.UI.ViewModels
 {
-    public class EditCustomerViewModel : BaseViewModel
+    public class EditCustomerViewModel : BaseViewModel, IDataErrorInfo
     {
         #region Fields
 
         private Customer customer;
+        private Dictionary<string, string> dataErrorsDictionary;
 
         #endregion Fields
 
@@ -94,7 +96,76 @@ namespace GarageManager.UI.ViewModels
             set => ErrorMessageViewModel.Message = value;
         }
 
+        public string Error => throw new NotImplementedException();
+
+        public Dictionary<string, string> DataErrorsCollection
+        {
+            get
+            {
+                return this.dataErrorsDictionary;
+            }
+            private set
+            {
+                this.dataErrorsDictionary = value;
+            }
+        }
+
+        public bool IsDataValid
+        {
+            get
+            {
+                foreach (KeyValuePair<string, string> item in dataErrorsDictionary)
+                {
+                    if (item.Value != null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
         #endregion Properties
+
+        #region Indexers
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                string result = null;
+
+                switch (propertyName)
+                {
+                    case nameof(FirstName):
+                        if (string.IsNullOrWhiteSpace(FirstName))
+                            result = "First name cannot be empty.";
+                        break;
+                    case nameof(LastName):
+                        if (string.IsNullOrWhiteSpace(LastName))
+                            result = "Last name cannot be empty.";
+                        break;
+                    case nameof(PhoneNumber):
+                        if (string.IsNullOrWhiteSpace(PhoneNumber))
+                            result = "Last name cannot be empty.";
+                        break;
+                    case nameof(Email):
+                        if (string.IsNullOrWhiteSpace(Email))
+                            result = "Last name cannot be empty.";
+                        break;
+                }
+
+                if (DataErrorsCollection.ContainsKey(propertyName))
+                    DataErrorsCollection[propertyName] = result;
+                else
+                    DataErrorsCollection.Add(propertyName, result);
+
+                OnPropertyChanged(nameof(DataErrorsCollection));
+                return result;
+            }
+        }
+
+        #endregion Indexers
 
         #region Commands
 
@@ -106,6 +177,7 @@ namespace GarageManager.UI.ViewModels
 
         public EditCustomerViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
+            this.DataErrorsCollection = new Dictionary<string, string>();
             this.EditCustomerCommand = new EditCustomerCommand(this, customersService, navigator, viewModelFactory, messageBoxService);
             this.ErrorMessageViewModel = new MessageViewModel();
         }
