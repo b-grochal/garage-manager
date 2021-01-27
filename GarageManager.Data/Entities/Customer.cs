@@ -11,7 +11,7 @@ namespace GarageManager.Data.Entities
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public ICollection<Car> Cars { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
 
         public string FullName
         {

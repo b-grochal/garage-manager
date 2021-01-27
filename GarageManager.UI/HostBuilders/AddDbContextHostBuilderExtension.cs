@@ -17,7 +17,7 @@ namespace GarageManager.UI.HostBuilders
             {
 
                 string connectionString = context.Configuration.GetConnectionString("Default");
-                Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlServer(connectionString);
+                Action<DbContextOptionsBuilder> configureDbContext = o => o.UseLazyLoadingProxies().UseSqlServer(connectionString);
 
                 services.AddDbContext<GarageManagerDbContext>(configureDbContext);
             });
