@@ -45,5 +45,10 @@ namespace GarageManager.UI.Commands.Services
                 createServiceViewModel.ErrorMessage = "Failed to create service";
             }
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && createServiceViewModel.IsDataValid;
+        }
     }
 }
