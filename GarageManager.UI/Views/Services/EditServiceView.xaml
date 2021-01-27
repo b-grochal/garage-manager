@@ -49,7 +49,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Description: " Grid.Column="0" FontSize="15" Margin="0,0,5,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Description, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding DataErrorsDictionary[Description]}" FontSize="15"/>
+                    <TextBox Grid.Column="1" Text="{Binding Description, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding DataErrorsDictionary[Description]}" Height="40" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" FontSize="15"/>
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="0,5">
