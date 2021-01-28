@@ -42,7 +42,7 @@ namespace GarageManager.UI.Commands.Services
             }
             catch (Exception)
             {
-                createServiceViewModel.ErrorMessage = "Failed to create service";
+                createServiceViewModel.ErrorMessage = "Failed to create service.";
             }
         }
 

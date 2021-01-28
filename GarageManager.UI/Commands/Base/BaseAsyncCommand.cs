@@ -19,7 +19,6 @@ namespace GarageManager.UI.Commands
             {
                 _isExecuting = value;
                 CommandManager.InvalidateRequerySuggested();
-                //CanExecuteChanged?.Invoke(this, new EventArgs());
             }
         }
 

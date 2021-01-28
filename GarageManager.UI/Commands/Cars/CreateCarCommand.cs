@@ -42,7 +42,7 @@ namespace GarageManager.UI.Commands.Cars
             }
             catch (Exception)
             {
-                createCarViewModel.ErrorMessage = "Failed to create user.";
+                createCarViewModel.ErrorMessage = "Failed to create car.";
             }
             
         }

@@ -40,7 +40,7 @@ namespace GarageManager.UI.Commands
             }
             catch (CustomerNotFoundException ex)
             {
-                messageBoxService.ShowErrorMessageBox("Error", $"Selected car with ID: {ex.CustomerId} not found.");
+                messageBoxService.ShowErrorMessageBox("Error", $"Selected customer with ID: {ex.CustomerId} not found.");
             }
             catch (Exception)
             {
