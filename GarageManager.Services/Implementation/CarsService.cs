@@ -62,7 +62,7 @@ namespace GarageManager.Services.Implementation
         {
             using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                var car = await context.Cars.Include(c => c.Customer).FirstOrDefaultAsync(c => c.CarId == carId);
+                var car = await context.Cars.Include(c => c.Customer).Include(c => c.Services).FirstOrDefaultAsync(c => c.CarId == carId);
 
                 if (car == null)
                 {
