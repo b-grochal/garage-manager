@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageManager.Data.Migrations
 {
     [DbContext(typeof(GarageManagerDbContext))]
-    [Migration("20210128100241_Init")]
+    [Migration("20210128201755_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,7 +133,7 @@ namespace GarageManager.Data.Migrations
                         new
                         {
                             UserId = 1,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGlNDPIB7onuA8CXfTuxv57TyUHbTmDOqUC5K7GGFiULCRbPTTmcj8sCDKsyMzt6XA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE0DQ82WHlzLW6Lt4qMAyhabYGwrGvpMAxkMASH5TWw0F9qE9R3uesGcPQTb+NpwfA==",
                             UserName = "Admin"
                         });
                 });

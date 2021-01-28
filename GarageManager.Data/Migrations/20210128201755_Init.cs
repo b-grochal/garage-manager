@@ -89,7 +89,7 @@ namespace GarageManager.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "PasswordHash", "UserName" },
-                values: new object[] { 1, "AQAAAAEAACcQAAAAEGlNDPIB7onuA8CXfTuxv57TyUHbTmDOqUC5K7GGFiULCRbPTTmcj8sCDKsyMzt6XA==", "Admin" });
+                values: new object[] { 1, "AQAAAAEAACcQAAAAEE0DQ82WHlzLW6Lt4qMAyhabYGwrGvpMAxkMASH5TWw0F9qE9R3uesGcPQTb+NpwfA==", "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CustomerId",

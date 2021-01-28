@@ -131,7 +131,7 @@ namespace GarageManager.Data.Migrations
                         new
                         {
                             UserId = 1,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGlNDPIB7onuA8CXfTuxv57TyUHbTmDOqUC5K7GGFiULCRbPTTmcj8sCDKsyMzt6XA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE0DQ82WHlzLW6Lt4qMAyhabYGwrGvpMAxkMASH5TWw0F9qE9R3uesGcPQTb+NpwfA==",
                             UserName = "Admin"
                         });
                 });

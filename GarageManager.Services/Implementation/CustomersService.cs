@@ -27,9 +27,7 @@ namespace GarageManager.Services.Implementation
             {
                 await context.Customers.AddAsync(cutsomer);
                 await context.SaveChangesAsync();
-
             }
-            
         }
 
         public async Task DeleteCustomer(int customerId)
@@ -46,7 +44,6 @@ namespace GarageManager.Services.Implementation
                 context.Customers.Remove(customer);
                 await context.SaveChangesAsync();
             }
-            
         }
 
         public async Task EditCustomer(Customer customer)
@@ -56,14 +53,13 @@ namespace GarageManager.Services.Implementation
                 context.Customers.Update(customer);
                 await context.SaveChangesAsync();
             }
-            
         }
 
         public async Task<Customer> GetCustomer(int customerId)
         {
             using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                var customer = await context.Customers.FindAsync(customerId);
+                var customer = await context.Customers.Include(c => c.Cars).FirstOrDefaultAsync(c => c.CustomerId == customerId);
 
                 if (customer == null)
                 {
@@ -72,7 +68,6 @@ namespace GarageManager.Services.Implementation
 
                 return customer;
             }
-            
         }
 
         public async Task<IEnumerable<Customer>> GetCustomers()
@@ -81,7 +76,6 @@ namespace GarageManager.Services.Implementation
             {
                 return await context.Customers.ToListAsync();
             }
-            
         }
 
         public async Task<IEnumerable<Customer>> GetCustomers(CustomersListSearchCriteria customersListSearchCriteria)
@@ -102,7 +96,6 @@ namespace GarageManager.Services.Implementation
 
                 return await queryable.ToListAsync();
             }
-            
         }
     }
 }

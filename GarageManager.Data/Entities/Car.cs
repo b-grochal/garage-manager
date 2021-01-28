@@ -15,8 +15,8 @@ namespace GarageManager.Data.Entities
         public string FuelType { get; set; }
         public string Engine { get; set; }
         public string Transmission { get; set; }
-        public virtual Customer Customer { get; set; }
-        public virtual ICollection<Service> Services{ get; set; }
+        public Customer Customer { get; set; }
+        public ICollection<Service> Services{ get; set; }
 
         public string FullName
         {

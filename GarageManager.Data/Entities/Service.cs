@@ -12,6 +12,6 @@ namespace GarageManager.Data.Entities
         public string Description { get; set; }
         public decimal Cost { get; set; }
         public DateTime DateOfService { get; set; }
-        public virtual Car Car { get; set; }
+        public Car Car { get; set; }
     }
 }
