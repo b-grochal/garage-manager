@@ -8,16 +8,16 @@ namespace GarageManager.UI.State.Authenticator
 {
     public class Authenticator : IAuthenticator
     {
-        private User _loggedUser;
+        private User loggedUser;
         public User LoggedUser
         {
             get
             {
-                return this._loggedUser;
+                return this.loggedUser;
             }
             set
             {
-                this._loggedUser = value;
+                this.loggedUser = value;
                 StateChanged?.Invoke();
             }
         }
