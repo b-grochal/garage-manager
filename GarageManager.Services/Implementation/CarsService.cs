@@ -28,7 +28,6 @@ namespace GarageManager.Services.Implementation
                 await context.Cars.AddAsync(car);
                 await context.SaveChangesAsync();
             }
-            
         }
 
         public async Task DeleteCar(int carId)
@@ -45,7 +44,6 @@ namespace GarageManager.Services.Implementation
                 context.Cars.Remove(car);
                 await context.SaveChangesAsync();
             }
-            
         }
 
         public async Task EditCar(Car car)
@@ -55,7 +53,6 @@ namespace GarageManager.Services.Implementation
                 context.Cars.Update(car);
                 await context.SaveChangesAsync();
             }
-            
         }
 
         public async Task<Car> GetCar(int carId)
@@ -71,7 +68,6 @@ namespace GarageManager.Services.Implementation
 
                 return car;
             }
-            
         }
 
         public async Task<IEnumerable<Car>> GetCars()
@@ -80,7 +76,6 @@ namespace GarageManager.Services.Implementation
             {
                 return await context.Cars.ToListAsync();
             }
-            
         }
 
         public async Task<IEnumerable<Car>> GetCars(CarsListSearchCriteria carsListSearchCriteria)
@@ -96,7 +91,6 @@ namespace GarageManager.Services.Implementation
 
                 return await queryable.ToListAsync();
             }
-            
         }
     }
 }
