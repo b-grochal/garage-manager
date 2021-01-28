@@ -26,7 +26,7 @@ namespace GarageManager.UI.Views
 
         private void CostPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !Regex.IsMatch(e.Text, "^[1-9.]+$");
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9.]+$");
         }
     }
 }

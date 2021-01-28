@@ -49,12 +49,12 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.customersListSearchCriteria.FirstName;
+                return this.customersListSearchCriteria.LastName;
             }
             set
             {
-                this.customersListSearchCriteria.FirstName = value;
-                OnPropertyChanged(nameof(FirstNameSearchCirteria));
+                this.customersListSearchCriteria.LastName = value;
+                OnPropertyChanged(nameof(LastNameSearchCirteria));
             }
         }
 
