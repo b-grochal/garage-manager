@@ -24,9 +24,6 @@ namespace GarageManager.UI.HostBuilders
                 services.AddSingleton<ICarsService, CarsService>();
                 services.AddSingleton<IServicesService, ServicesService>();
                 services.AddSingleton<IMessageBoxService, MessageBoxService>();
-                //services.AddSingleton<IBuyStockService, BuyStockService>();
-                //services.AddSingleton<ISellStockService, SellStockService>();
-                //services.AddSingleton<IMajorIndexService, MajorIndexService>();
             });
 
             return host;

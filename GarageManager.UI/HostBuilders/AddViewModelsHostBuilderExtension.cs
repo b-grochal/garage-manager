@@ -17,18 +17,10 @@ namespace GarageManager.UI.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                //services.AddSingleton(CreateHomeViewModel);
                 services.AddSingleton<HomeViewModel>();
-                //services.AddSingleton<LoginViewModel>();
-                //services.AddSingleton<BuyViewModel>();
-                //services.AddSingleton<SellViewModel>();
-                //services.AddSingleton<AssetSummaryViewModel>();
                 services.AddSingleton<MainViewModel>();
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
-                //services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services => () => services.GetRequiredService<PortfolioViewModel>());
-                //services.AddSingleton<CreateViewModel<BuyViewModel>>(services => () => services.GetRequiredService<BuyViewModel>());
-                //services.AddSingleton<CreateViewModel<SellViewModel>>(services => () => services.GetRequiredService<SellViewModel>());
                 services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
                 services.AddSingleton<CreateViewModel<UsersListViewModel>>(services => () => CreateUsersListViewModel(services));
                 services.AddSingleton<CreateViewModel<CreateUserViewModel>>(services => () => CreateCreateUserViewModel(services));
@@ -44,13 +36,8 @@ namespace GarageManager.UI.HostBuilders
                 services.AddSingleton<CreateViewModel<CreateServiceViewModel>>(services => () => CreateCreateServiceViewModel(services));
                 services.AddSingleton<CreateViewModel<ServiceDetailsViewModel>>(services => () => CreateServiceDetailsViewModel(services));
                 services.AddSingleton<CreateViewModel<EditServiceViewModel>>(services => () => CreateEditServiceViewModel(services));
-                //services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
-
-                //services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
-                //services.AddSingleton<ViewModelDelegateRenavigator<LoginViewModel>>();
-                //services.AddSingleton<ViewModelDelegateRenavigator<RegisterViewModel>>();
             });
 
             return host;
