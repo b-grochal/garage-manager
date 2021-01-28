@@ -15,51 +15,63 @@ namespace GarageManager.Services.Implementation
 {
     public class UsersService : IUsersService
     {
-        private readonly GarageManagerDbContext context;
+        private readonly GarageManagerDbContextFactory contextFactory;
         private readonly IPasswordHasher<User> passwordHasher;
 
-        public UsersService(GarageManagerDbContext context, IPasswordHasher<User> passwordHasher)
+        public UsersService(GarageManagerDbContextFactory contextFactory, IPasswordHasher<User> passwordHasher)
         {
-            this.context = context;
+            this.contextFactory = contextFactory;
             this.passwordHasher = passwordHasher;
         }
 
         public async Task CreateUser(User user, string password)
         {
-            string passwordHash = passwordHasher.HashPassword(user, password);
-            user.PasswordHash = passwordHash;
-            await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                string passwordHash = passwordHasher.HashPassword(user, password);
+                user.PasswordHash = passwordHash;
+                await context.Users.AddAsync(user);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteUser(int userId)
         {
-            var user = context.Users.Find(userId);
-
-            if(user == null)
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                throw new UserNotFoundException(userId);
-            }
+                var user = context.Users.Find(userId);
 
-            context.Users.Remove(user);
-            await context.SaveChangesAsync();
+                if (user == null)
+                {
+                    throw new UserNotFoundException(userId);
+                }
+
+                context.Users.Remove(user);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await context.Users.ToListAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                return await context.Users.ToListAsync();
+            }
         }
 
         public async Task<IEnumerable<User>> GetUsers(UsersListSearchCriteria usersListSearchCriteria)
         {
-            var queryable = context.Users.AsQueryable();
-
-            if (!string.IsNullOrEmpty(usersListSearchCriteria.Login))
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                queryable = queryable.Where(u => u.UserName.Contains(usersListSearchCriteria.Login));
-            }
+                var queryable = context.Users.AsQueryable();
 
-            return await queryable.ToListAsync();
+                if (!string.IsNullOrEmpty(usersListSearchCriteria.Login))
+                {
+                    queryable = queryable.Where(u => u.UserName.Contains(usersListSearchCriteria.Login));
+                }
+
+                return await queryable.ToListAsync();
+            }
         }
     }
 }

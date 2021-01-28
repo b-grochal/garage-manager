@@ -14,32 +14,35 @@ namespace GarageManager.Services.Implementation
 {
     public class AuthService : IAuthService
     {
-        private readonly GarageManagerDbContext context;
+        private readonly GarageManagerDbContextFactory contextFactory;
         private readonly IPasswordHasher<User> passwordHasher;
 
-        public AuthService(GarageManagerDbContext context, IPasswordHasher<User> passwordHasher)
+        public AuthService(GarageManagerDbContextFactory context, IPasswordHasher<User> passwordHasher)
         {
-            this.context = context;
+            this.contextFactory = context;
             this.passwordHasher = passwordHasher;
         }
 
         public async Task<User> Login(string userName, string password)
         {
-            User user = await context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
-
-            if (user == null)
+            using(GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                throw new InvalidUserNameException(userName);
+                User user = await context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+
+                if (user == null)
+                {
+                    throw new InvalidUserNameException(userName);
+                }
+
+                PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+
+                if (passwordResult != PasswordVerificationResult.Success)
+                {
+                    throw new InvalidPasswordException(userName);
+                }
+
+                return user;
             }
-
-            PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
-
-            if (passwordResult != PasswordVerificationResult.Success)
-            {
-                throw new InvalidPasswordException(userName);
-            }
-
-            return user;
         }
     }
 }

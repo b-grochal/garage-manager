@@ -14,65 +14,89 @@ namespace GarageManager.Services.Implementation
 {
     public class CarsService : ICarsService
     {
-        private readonly GarageManagerDbContext context;
+        private readonly GarageManagerDbContextFactory contextFactory;
 
-        public CarsService(GarageManagerDbContext context)
+        public CarsService(GarageManagerDbContextFactory contextFactory)
         {
-            this.context = context;
+            this.contextFactory = contextFactory;
         }
 
         public async Task CreateCar(Car car)
         {
-            await context.Cars.AddAsync(car);
-            await context.SaveChangesAsync();
+            using(GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                await context.Cars.AddAsync(car);
+                await context.SaveChangesAsync();
+            }
+            
         }
 
         public async Task DeleteCar(int carId)
         {
-            var car = await context.Cars.FindAsync(carId);
-
-            if (car == null)
+            using(GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                throw new CarNotFoundException(carId);
-            }
+                var car = await context.Cars.FindAsync(carId);
 
-            context.Cars.Remove(car);
-            await context.SaveChangesAsync();
+                if (car == null)
+                {
+                    throw new CarNotFoundException(carId);
+                }
+
+                context.Cars.Remove(car);
+                await context.SaveChangesAsync();
+            }
+            
         }
 
         public async Task EditCar(Car car)
         {
-            context.Cars.Update(car);
-            await context.SaveChangesAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                context.Cars.Update(car);
+                await context.SaveChangesAsync();
+            }
+            
         }
 
         public async Task<Car> GetCar(int carId)
         {
-            var car = await context.Cars.FindAsync(carId);
-
-            if (car == null)
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                throw new CarNotFoundException(carId);
-            }
+                var car = await context.Cars.FindAsync(carId);
 
-            return car;
+                if (car == null)
+                {
+                    throw new CarNotFoundException(carId);
+                }
+
+                return car;
+            }
+            
         }
 
         public async Task<IEnumerable<Car>> GetCars()
         {
-            return await context.Cars.ToListAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                return await context.Cars.ToListAsync();
+            }
+            
         }
 
         public async Task<IEnumerable<Car>> GetCars(CarsListSearchCriteria carsListSearchCriteria)
         {
-            var queryable = context.Cars.AsQueryable();
-
-            if (!string.IsNullOrEmpty(carsListSearchCriteria.Vin))
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                queryable = queryable.Where(c => c.Vin.Equals(carsListSearchCriteria.Vin));
-            }
+                var queryable = context.Cars.AsQueryable();
 
-            return await queryable.ToListAsync();
+                if (!string.IsNullOrEmpty(carsListSearchCriteria.Vin))
+                {
+                    queryable = queryable.Where(c => c.Vin.Equals(carsListSearchCriteria.Vin));
+                }
+
+                return await queryable.ToListAsync();
+            }
+            
         }
     }
 }

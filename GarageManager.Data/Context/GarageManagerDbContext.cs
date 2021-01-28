@@ -18,8 +18,7 @@ namespace GarageManager.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedData();
+            base.OnModelCreating(modelBuilder);
         }
-
-
     }
 }

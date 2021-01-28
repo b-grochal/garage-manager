@@ -14,70 +14,95 @@ namespace GarageManager.Services.Implementation
 {
     public class CustomersService : ICustomersService
     {
-        private readonly GarageManagerDbContext context;
+        private readonly GarageManagerDbContextFactory contextFactory;
 
-        public CustomersService(GarageManagerDbContext context)
+        public CustomersService(GarageManagerDbContextFactory contextFactory)
         {
-            this.context = context;
+            this.contextFactory = contextFactory;
         }
 
         public async Task CreateCustomer(Customer cutsomer)
         {
-            await context.Customers.AddAsync(cutsomer);
-            await context.SaveChangesAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                await context.Customers.AddAsync(cutsomer);
+                await context.SaveChangesAsync();
+
+            }
+            
         }
 
         public async Task DeleteCustomer(int customerId)
         {
-            var customer = await context.Customers.FindAsync(customerId);
-
-            if(customer == null)
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                throw new CustomerNotFoundException(customerId);
-            }
+                var customer = await context.Customers.FindAsync(customerId);
 
-            context.Customers.Remove(customer);
-            await context.SaveChangesAsync();
+                if (customer == null)
+                {
+                    throw new CustomerNotFoundException(customerId);
+                }
+
+                context.Customers.Remove(customer);
+                await context.SaveChangesAsync();
+            }
+            
         }
 
         public async Task EditCustomer(Customer customer)
         {
-            context.Customers.Update(customer);
-            await context.SaveChangesAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                context.Customers.Update(customer);
+                await context.SaveChangesAsync();
+            }
+            
         }
 
         public async Task<Customer> GetCustomer(int customerId)
         {
-            var customer = await context.Customers.FindAsync(customerId);
-
-            if(customer == null)
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                throw new CustomerNotFoundException(customerId);
-            }
+                var customer = await context.Customers.FindAsync(customerId);
 
-            return customer;
+                if (customer == null)
+                {
+                    throw new CustomerNotFoundException(customerId);
+                }
+
+                return customer;
+            }
+            
         }
 
         public async Task<IEnumerable<Customer>> GetCustomers()
         {
-            return await context.Customers.ToListAsync();
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
+            {
+                return await context.Customers.ToListAsync();
+            }
+            
         }
 
         public async Task<IEnumerable<Customer>> GetCustomers(CustomersListSearchCriteria customersListSearchCriteria)
         {
-            var queryable = context.Customers.AsQueryable();
-
-            if (!string.IsNullOrEmpty(customersListSearchCriteria.FirstName))
+            using (GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                queryable = queryable.Where(c => c.FirstName.Equals(customersListSearchCriteria.FirstName));
-            }
+                var queryable = context.Customers.AsQueryable();
 
-            if (!string.IsNullOrEmpty(customersListSearchCriteria.LastName))
-            {
-                queryable = queryable.Where(c => c.LastName.Equals(customersListSearchCriteria.LastName));
-            }
+                if (!string.IsNullOrEmpty(customersListSearchCriteria.FirstName))
+                {
+                    queryable = queryable.Where(c => c.FirstName.Equals(customersListSearchCriteria.FirstName));
+                }
 
-            return await queryable.ToListAsync();
+                if (!string.IsNullOrEmpty(customersListSearchCriteria.LastName))
+                {
+                    queryable = queryable.Where(c => c.LastName.Equals(customersListSearchCriteria.LastName));
+                }
+
+                return await queryable.ToListAsync();
+            }
+            
         }
     }
 }
