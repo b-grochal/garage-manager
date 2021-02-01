@@ -3,10 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:GarageManager.UI.Converters"
         xmlns:local="clr-namespace:GarageManager.UI"
+        xmlns:nav="clr-namespace:GarageManager.UI.State.Navigator"
+        xmlns:vm="clr-namespace:GarageManager.UI.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="600" MinWidth="1080" WindowStartupLocation="CenterScreen" WindowState="Maximized" FontFamily="Arial">
+    <Window.Resources>
+        <converters:EqualValueToParameterConverter x:Key="EqualValueToParameterConverter" />
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Width="250">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLoggedIn}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <StackPanel Background="{StaticResource PrimaryBlackBrush}" Visibility="Visible">
+                <Grid Height="150">
+                    <TextBlock Foreground="{StaticResource PrimarySilverBrush}" FontSize="24" Text="Garage Manager" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                </Grid>
+                <StackPanel>
+                    <Button Content="Home" Command="{Binding ShowHomePageCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Users" Command="{Binding ShowUsersListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Customers" Command="{Binding ShowCustomersListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Cars" Command="{Binding ShowCarsListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                    <Button Content="Services" Command="{Binding ShowServicesListCommand}" BorderThickness="0" Background="{StaticResource PrimaryBlackBrush}" Foreground="{StaticResource PrimarySilverBrush}" FontSize="16" Padding="0,5"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        
+        <ScrollViewer Grid.Column="1">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </ScrollViewer>
+
 
     </Grid>
 </Window>
