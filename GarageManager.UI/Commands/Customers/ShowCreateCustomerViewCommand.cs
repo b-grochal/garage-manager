@@ -12,11 +12,13 @@ namespace GarageManager.UI.Commands
     {
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public ShowCreateCustomerViewCommand(INavigator navigator, IViewModelFactory viewModelFactory)
+        public ShowCreateCustomerViewCommand(INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -28,8 +30,15 @@ namespace GarageManager.UI.Commands
 
         public void Execute(object parameter)
         {
-            BaseViewModel createUserViewModel = viewModelFactory.CreateViewModel(ViewType.CreateCustomer);
-            navigator.CurrentViewModel = createUserViewModel;
+            try
+            {
+                BaseViewModel createUserViewModel = viewModelFactory.CreateViewModel(ViewType.CreateCustomer);
+                navigator.CurrentViewModel = createUserViewModel;
+            }
+            catch (Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
+            }
         }
     }
 }

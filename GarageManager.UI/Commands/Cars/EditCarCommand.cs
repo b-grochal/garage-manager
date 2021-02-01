@@ -16,23 +16,39 @@ namespace GarageManager.UI.Commands.Cars
         private readonly ICarsService carsService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public EditCarCommand(EditCarViewModel editCarViewModel, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public EditCarCommand(EditCarViewModel editCarViewModel, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.editCarViewModel = editCarViewModel;
             this.carsService = carsService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            await carsService.EditCar(editCarViewModel.Car);
-            IEnumerable<Car> cars = await carsService.GetCars();
-            CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
-            carsListViewModel.Cars = cars;
-            navigator.CurrentViewModel = carsListViewModel;
+            editCarViewModel.ErrorMessage = string.Empty;
 
+            try
+            {
+                await carsService.EditCar(editCarViewModel.Car);
+                IEnumerable<Car> cars = await carsService.GetCars();
+                CarsListViewModel carsListViewModel = (CarsListViewModel)viewModelFactory.CreateViewModel(ViewType.CarsList);
+                carsListViewModel.Cars = cars;
+                navigator.CurrentViewModel = carsListViewModel;
+                messageBoxService.ShowInformationMessageBox("Edit car", "Car was successfully edited.");
+            }
+            catch (Exception)
+            {
+                editCarViewModel.ErrorMessage = "Failed to edit car.";
+            }
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !IsExecuting && editCarViewModel.IsDataValid;
         }
     }
 }

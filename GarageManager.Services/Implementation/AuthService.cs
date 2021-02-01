@@ -1,5 +1,6 @@
 ﻿using GarageManager.Data.Context;
 using GarageManager.Data.Entities;
+using GarageManager.Services.Exceptions;
 using GarageManager.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,35 +14,35 @@ namespace GarageManager.Services.Implementation
 {
     public class AuthService : IAuthService
     {
-        private readonly GarageManagerDbContext _garageManagerDbContext;
-        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly GarageManagerDbContextFactory contextFactory;
+        private readonly IPasswordHasher<User> passwordHasher;
 
-        public AuthService(GarageManagerDbContext garageManagerDbContext, IPasswordHasher<User> passwordHasher)
+        public AuthService(GarageManagerDbContextFactory context, IPasswordHasher<User> passwordHasher)
         {
-            this._garageManagerDbContext = garageManagerDbContext;
-            this._passwordHasher = passwordHasher;
+            this.contextFactory = context;
+            this.passwordHasher = passwordHasher;
         }
 
         public async Task<User> Login(string userName, string password)
         {
-            User user = await _garageManagerDbContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
-
-            if (user == null)
+            using(GarageManagerDbContext context = contextFactory.CreateDbContext())
             {
-                //throw new UserNotFoundException(username);
-                throw new Exception();
+                User user = await context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+
+                if (user == null)
+                {
+                    throw new InvalidUserNameException(userName);
+                }
+
+                PasswordVerificationResult passwordResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+
+                if (passwordResult != PasswordVerificationResult.Success)
+                {
+                    throw new InvalidPasswordException(userName);
+                }
+
+                return user;
             }
-
-            PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
-
-            if (passwordResult != PasswordVerificationResult.Success)
-            {
-                //throw new InvalidPasswordException(username, password);
-                throw new Exception();
-            }
-
-            //return storedAccount;
-            return user;
         }
     }
 }

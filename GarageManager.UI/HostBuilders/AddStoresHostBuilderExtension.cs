@@ -16,8 +16,6 @@ namespace GarageManager.UI.HostBuilders
             {
                 services.AddSingleton<INavigator, Navigator>();
                 services.AddSingleton<IAuthenticator, Authenticator>();
-                //services.AddSingleton<IAccountStore, AccountStore>();
-                //services.AddSingleton<AssetStore>();
             });
 
             return host;

@@ -28,6 +28,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Margin="0,5">
@@ -39,10 +40,10 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Name:" FontSize="15" />
-                    <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
+                    <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15" VerticalAlignment="Top"
                         Text="{Binding Name, Mode=OneWay}" IsReadOnly="True" />
                     <TextBlock Grid.Column="2" Text="Description:" FontSize="15" Margin="10,0,0,0" />
-                    <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15"
+                    <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15" Height="40" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"
                         Text="{Binding Description, Mode=OneWay}" IsReadOnly="True" />
                 </Grid>
 
@@ -56,10 +57,21 @@
 
                     <TextBlock Grid.Column="0" Text="Cost:" FontSize="15" />
                     <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Cost, Mode=OneWay}" IsReadOnly="True" />
+                        Text="{Binding Cost, Mode=OneWay, StringFormat=C}" IsReadOnly="True" />
                     <TextBlock Grid.Column="2" Text="Date:" FontSize="15" Margin="10,0,0,0" />
                     <TextBox Grid.Column="3" Margin="20,0,0,0" FontSize="15"
-                        Text="{Binding Date, Mode=OneWay}" IsReadOnly="True" />
+                        Text="{Binding Date, Mode=OneWay, StringFormat=d}" IsReadOnly="True" />
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" SharedSizeGroup="Label" />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="VIN:" FontSize="15" />
+                    <TextBox Grid.Column="1" Margin="20,0,0,0" FontSize="15"
+                        Text="{Binding Vin, Mode=OneWay}" IsReadOnly="True" />
                 </Grid>
             </Grid>
         </Border>

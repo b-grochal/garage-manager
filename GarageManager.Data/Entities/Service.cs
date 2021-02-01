@@ -10,7 +10,7 @@ namespace GarageManager.Data.Entities
         public int CarId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Cosr { get; set; }
+        public decimal Cost { get; set; }
         public DateTime DateOfService { get; set; }
         public Car Car { get; set; }
     }

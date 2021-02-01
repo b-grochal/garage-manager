@@ -10,13 +10,14 @@ namespace GarageManager.UI.Commands
 {
     public class ShowHomeViewCommand : ICommand
     {
-        private readonly INavigator _navigator;
-        private readonly IViewModelFactory _viewModelFactory;
+        private readonly INavigator navigator;
+        private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
         public ShowHomeViewCommand(INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            this._navigator = navigator;
-            this._viewModelFactory = viewModelFactory;
+            this.navigator = navigator;
+            this.viewModelFactory = viewModelFactory;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -28,8 +29,15 @@ namespace GarageManager.UI.Commands
 
         public void Execute(object parameter)
         {
-            var homeViewModel = _viewModelFactory.CreateViewModel(ViewType.Home);
-            _navigator.CurrentViewModel = homeViewModel;
+            try
+            {
+                var homeViewModel = viewModelFactory.CreateViewModel(ViewType.Home);
+                navigator.CurrentViewModel = homeViewModel;
+            }
+            catch(Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", "An unexpected error occurred.");
+            }
         }
     }
 }

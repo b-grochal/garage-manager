@@ -7,18 +7,18 @@ namespace GarageManager.Data.Context
 {
     public class GarageManagerDbContextFactory
     {
-        private readonly Action<DbContextOptionsBuilder> _configureDbContext;
+        private readonly Action<DbContextOptionsBuilder> configureDbContext;
 
         public GarageManagerDbContextFactory(Action<DbContextOptionsBuilder> configureDbContext)
         {
-            _configureDbContext = configureDbContext;
+            this.configureDbContext = configureDbContext;
         }
 
         public GarageManagerDbContext CreateDbContext()
         {
             DbContextOptionsBuilder<GarageManagerDbContext> options = new DbContextOptionsBuilder<GarageManagerDbContext>();
 
-            _configureDbContext(options);
+            configureDbContext(options);
 
             return new GarageManagerDbContext(options.Options);
         }

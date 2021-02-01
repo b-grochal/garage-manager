@@ -7,16 +7,16 @@ namespace GarageManager.UI.State.Navigator
 {
     public class Navigator : INavigator
     {
-        private BaseViewModel _currentViewModel;
+        private BaseViewModel currentViewModel;
         public BaseViewModel CurrentViewModel 
         {
             get
             {
-                return _currentViewModel;
+                return currentViewModel;
             }
             set
             {
-                _currentViewModel = value;
+                currentViewModel = value;
                 StateChanged?.Invoke();
             }
         }

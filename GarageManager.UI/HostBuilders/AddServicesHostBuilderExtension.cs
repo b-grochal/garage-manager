@@ -1,6 +1,7 @@
 ﻿using GarageManager.Data.Entities;
 using GarageManager.Services.Implementation;
 using GarageManager.Services.Interfaces;
+using GarageManager.UI.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,9 +23,7 @@ namespace GarageManager.UI.HostBuilders
                 services.AddSingleton<ICustomersService, CustomersService>();
                 services.AddSingleton<ICarsService, CarsService>();
                 services.AddSingleton<IServicesService, ServicesService>();
-                //services.AddSingleton<IBuyStockService, BuyStockService>();
-                //services.AddSingleton<ISellStockService, SellStockService>();
-                //services.AddSingleton<IMajorIndexService, MajorIndexService>();
+                services.AddSingleton<IMessageBoxService, MessageBoxService>();
             });
 
             return host;

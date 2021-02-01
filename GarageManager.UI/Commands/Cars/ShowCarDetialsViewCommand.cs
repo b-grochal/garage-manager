@@ -1,4 +1,5 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Exceptions;
 using GarageManager.Services.Interfaces;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
@@ -16,21 +17,35 @@ namespace GarageManager.UI.Commands.Cars
         private readonly ICarsService carsService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public ShowCarDetialsViewCommand(CarsListViewModel carsListViewModel, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public ShowCarDetialsViewCommand(CarsListViewModel carsListViewModel, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.carsListViewModel = carsListViewModel;
             this.carsService = carsService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            Car car = await carsService.GetCar(carsListViewModel.SelectedCar.CarId);
-            CarDetailsViewModel carDetailsViewModel = (CarDetailsViewModel)viewModelFactory.CreateViewModel(ViewType.CarDetails);
-            carDetailsViewModel.Car = car;
-            navigator.CurrentViewModel = carDetailsViewModel;
+            try
+            {
+                Car car = await carsService.GetCar(carsListViewModel.SelectedCar.CarId);
+                CarDetailsViewModel carDetailsViewModel = (CarDetailsViewModel)viewModelFactory.CreateViewModel(ViewType.CarDetails);
+                carDetailsViewModel.Car = car;
+                navigator.CurrentViewModel = carDetailsViewModel;
+            }
+            catch (CarNotFoundException ex)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", $"Selected car with ID: {ex.CarId} not found.");
+            }
+            catch (Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
+            }
+
         }
 
         public override bool CanExecute(object parameter)

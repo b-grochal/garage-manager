@@ -14,20 +14,33 @@ namespace GarageManager.UI.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private readonly IViewModelFactory _viewModelFactory;
-        private readonly IAuthenticator _authenticator;
-        private readonly INavigator _navigator;
-        private readonly IUsersService _usersService;
+        #region Fields
 
-        public bool IsLoggedIn => _authenticator.IsLoggedIn;
-        public BaseViewModel CurrentViewModel => _navigator.CurrentViewModel;
+        private readonly IViewModelFactory viewModelFactory;
+        private readonly IAuthenticator authenticator;
+        private readonly INavigator navigator;
+        private readonly IUsersService usersService;
+
+        #endregion Fields
+
+        #region Properties
+
+        public bool IsLoggedIn => authenticator.IsLoggedIn;
+        public BaseViewModel CurrentViewModel => navigator.CurrentViewModel;
+
+        #endregion Properties
+
+        #region Commands
 
         public ICommand ShowHomePageCommand { get; }
         public ICommand ShowUsersListCommand { get; }
         public ICommand ShowCustomersListCommand { get; }
         public ICommand ShowCarsListCommand { get;  }
-
         public ICommand ShowServicesListCommand { get; }
+
+        #endregion Commands
+
+        #region Constructors
 
         public MainViewModel(
             IViewModelFactory viewModelFactory, 
@@ -36,25 +49,30 @@ namespace GarageManager.UI.ViewModels
             IUsersService usersSerivce, 
             ICustomersService customersService, 
             ICarsService carsService,
-            IServicesService servicesService)
+            IServicesService servicesService,
+            IMessageBoxService messageBoxService)
         {
-            this._viewModelFactory = viewModelFactory;
-            this._authenticator = authenticator;
-            this._navigator = navigator;
-            this._usersService = usersSerivce;
+            this.viewModelFactory = viewModelFactory;
+            this.authenticator = authenticator;
+            this.navigator = navigator;
+            this.usersService = usersSerivce;
 
 
             this.ShowHomePageCommand = new ShowHomeViewCommand(navigator, viewModelFactory);
-            this.ShowUsersListCommand = new ShowUsersListCommand(usersSerivce, navigator, viewModelFactory);
-            this.ShowCustomersListCommand = new ShowCustomersListCommand(customersService, navigator, viewModelFactory);
-            this.ShowCarsListCommand = new ShowCarsListCommand(carsService, navigator, viewModelFactory);
-            this.ShowServicesListCommand = new ShowServicesListCommand(servicesService, navigator, viewModelFactory);
+            this.ShowUsersListCommand = new ShowUsersListCommand(usersSerivce, navigator, viewModelFactory, messageBoxService);
+            this.ShowCustomersListCommand = new ShowCustomersListCommand(customersService, navigator, viewModelFactory, messageBoxService);
+            this.ShowCarsListCommand = new ShowCarsListCommand(carsService, navigator, viewModelFactory, messageBoxService);
+            this.ShowServicesListCommand = new ShowServicesListCommand(servicesService, navigator, viewModelFactory, messageBoxService);
 
-            _navigator.StateChanged += Navigator_StateChanged;
-            _authenticator.StateChanged += Authenticator_StateChanged;
+            this.navigator.StateChanged += Navigator_StateChanged;
+            this.authenticator.StateChanged += Authenticator_StateChanged;
 
-            _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(ViewType.Login);
+            this.navigator.CurrentViewModel = this.viewModelFactory.CreateViewModel(ViewType.Login);
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         private void Authenticator_StateChanged()
         {
@@ -65,5 +83,7 @@ namespace GarageManager.UI.ViewModels
         {
             OnPropertyChanged(nameof(CurrentViewModel));
         }
+
+        #endregion Methods
     }
 }

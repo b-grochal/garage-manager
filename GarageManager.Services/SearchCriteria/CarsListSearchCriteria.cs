@@ -6,6 +6,6 @@ namespace GarageManager.Services.SearchCriteria
 {
     public class CarsListSearchCriteria
     {
-        public string VIN { get; set; }
+        public string Vin { get; set; }
     }
 }

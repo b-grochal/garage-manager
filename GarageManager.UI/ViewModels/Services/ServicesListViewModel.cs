@@ -79,19 +79,21 @@ namespace GarageManager.UI.ViewModels
         public ICommand ShowEditServiceViewCommand { get; }
         public ICommand ShowServiceDetailsViewCommand { get; }
         public ICommand DeleteServiceCommand { get; }
+        public ICommand ResetServicesListSearchCriteriaCommand { get; }
 
         #endregion Commands
 
         #region Constructors
 
-        public ServicesListViewModel(IServicesService servicesService, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public ServicesListViewModel(IServicesService servicesService, ICarsService carsService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.servicesListSearchCriteria = new ServicesListSearchCriteria();
-            this.SearchServicesListCommand = new SearchServicesListCommand(this, servicesService);
-            this.ShowCreateServiceViewCommand = new ShowCreateServiceViewCommand(carsService, navigator, viewModelFactory);
-            this.ShowEditServiceViewCommand = new ShowEditServiceViewCommand(this, servicesService, carsService, navigator, viewModelFactory);
-            this.ShowServiceDetailsViewCommand = new ShowServiceDetailsViewCommand(this, servicesService, navigator, viewModelFactory);
-            this.DeleteServiceCommand = new DeleteServiceCommand(this, servicesService);
+            this.SearchServicesListCommand = new SearchServicesListCommand(this, servicesService, messageBoxService);
+            this.ShowCreateServiceViewCommand = new ShowCreateServiceViewCommand(carsService, navigator, viewModelFactory, messageBoxService);
+            this.ShowEditServiceViewCommand = new ShowEditServiceViewCommand(this, servicesService, carsService, navigator, viewModelFactory, messageBoxService);
+            this.ShowServiceDetailsViewCommand = new ShowServiceDetailsViewCommand(this, servicesService, navigator, viewModelFactory, messageBoxService);
+            this.DeleteServiceCommand = new DeleteServiceCommand(this, servicesService, messageBoxService);
+            this.ResetServicesListSearchCriteriaCommand = new ResetServicesListSearchCriteriaCommand(this, servicesService, messageBoxService);
         }
 
         #endregion Constructors

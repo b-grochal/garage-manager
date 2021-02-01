@@ -47,7 +47,7 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.service.Cosr;
+                return this.service.Cost;
             }
         }
 
@@ -56,6 +56,14 @@ namespace GarageManager.UI.ViewModels
             get
             {
                 return this.service.DateOfService;
+            }
+        }
+
+        public string Vin
+        {
+            get
+            {
+                return this.service.Car.Vin;
             }
         }
 

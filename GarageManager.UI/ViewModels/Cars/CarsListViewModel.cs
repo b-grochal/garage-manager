@@ -35,11 +35,11 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.carsListSearchCriteria.VIN;
+                return this.carsListSearchCriteria.Vin;
             }
             set
             {
-                this.carsListSearchCriteria.VIN = value;
+                this.carsListSearchCriteria.Vin = value;
                 OnPropertyChanged(nameof(VinSearchCriteria));
             }
         }
@@ -74,24 +74,27 @@ namespace GarageManager.UI.ViewModels
 
         #region Commands
 
-        #endregion Commands
-
         public ICommand SearchCarsListCommand { get; }
         public ICommand ShowCreateCarViewCommand { get; }
         public ICommand ShowEditCarViewCommand { get; }
         public ICommand ShowCarDetailsViewCommand { get; }
         public ICommand DeleteCarCommand { get; }
+        public ICommand ResetCarsListSearchCriteriaCommand { get; }
+
+        #endregion Commands
 
         #region Constructors
 
-        public CarsListViewModel(ICarsService carsService, ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public CarsListViewModel(ICarsService carsService, ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.carsListSearchCriteria = new CarsListSearchCriteria();
-            this.SearchCarsListCommand = new SearchCarsListCommand(this, carsService);
-            this.ShowCreateCarViewCommand = new ShowCreateCarViewCommand(customersService, navigator, viewModelFactory);
-            this.ShowEditCarViewCommand = new ShowEditCarViewCommand(this, carsService, customersService, navigator, viewModelFactory);
-            this.ShowCarDetailsViewCommand = new ShowCarDetialsViewCommand(this, carsService, navigator, viewModelFactory);
-            this.DeleteCarCommand = new DeleteCarCommand(this, carsService);
+            this.SearchCarsListCommand = new SearchCarsListCommand(this, carsService, messageBoxService);
+            this.ShowCreateCarViewCommand = new ShowCreateCarViewCommand(customersService, navigator, viewModelFactory, messageBoxService);
+            this.ShowEditCarViewCommand = new ShowEditCarViewCommand(this, carsService, customersService, navigator, viewModelFactory, messageBoxService);
+            this.ShowCarDetailsViewCommand = new ShowCarDetialsViewCommand(this, carsService, navigator, viewModelFactory, messageBoxService);
+            this.DeleteCarCommand = new DeleteCarCommand(this, carsService, messageBoxService);
+            this.ResetCarsListSearchCriteriaCommand = new ResetCarsListSearchCriteriaCommand(this, carsService, messageBoxService);
+
         }
 
         #endregion Cnstructors

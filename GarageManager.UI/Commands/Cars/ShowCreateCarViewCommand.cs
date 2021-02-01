@@ -15,20 +15,29 @@ namespace GarageManager.UI.Commands.Cars
         private readonly ICustomersService customersService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public ShowCreateCarViewCommand(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public ShowCreateCarViewCommand(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.customersService = customersService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            IEnumerable<Customer> customers = await customersService.GetCustomers();
-            CreateCarViewModel createCarViewModel = (CreateCarViewModel)viewModelFactory.CreateViewModel(ViewType.CreateCar);
-            createCarViewModel.Customers = customers;
-            navigator.CurrentViewModel = createCarViewModel;
+            try
+            {
+                IEnumerable<Customer> customers = await customersService.GetCustomers();
+                CreateCarViewModel createCarViewModel = (CreateCarViewModel)viewModelFactory.CreateViewModel(ViewType.CreateCar);
+                createCarViewModel.Customers = customers;
+                navigator.CurrentViewModel = createCarViewModel;
+            }
+            catch(Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
+            }
         }
     }
 }

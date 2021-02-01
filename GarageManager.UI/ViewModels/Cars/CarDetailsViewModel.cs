@@ -48,7 +48,7 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.car.VIN;
+                return this.car.Vin;
             }
         }
 
@@ -81,6 +81,14 @@ namespace GarageManager.UI.ViewModels
             get
             {
                 return this.car.Transmission;
+            }
+        }
+
+        public string Owner
+        {
+            get
+            {
+                return this.car.Customer.FullName;
             }
         }
 

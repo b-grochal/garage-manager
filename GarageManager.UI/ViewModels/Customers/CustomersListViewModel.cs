@@ -2,6 +2,7 @@
 using GarageManager.Services.Interfaces;
 using GarageManager.Services.SearchCriteria;
 using GarageManager.UI.Commands;
+using GarageManager.UI.Commands.Customers;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
 using System;
@@ -48,12 +49,12 @@ namespace GarageManager.UI.ViewModels
         {
             get
             {
-                return this.customersListSearchCriteria.FirstName;
+                return this.customersListSearchCriteria.LastName;
             }
             set
             {
-                this.customersListSearchCriteria.FirstName = value;
-                OnPropertyChanged(nameof(FirstNameSearchCirteria));
+                this.customersListSearchCriteria.LastName = value;
+                OnPropertyChanged(nameof(LastNameSearchCirteria));
             }
         }
 
@@ -93,19 +94,21 @@ namespace GarageManager.UI.ViewModels
         public ICommand ShowEditCustomerViewCommand { get; }
         public ICommand ShowCustomerDetailsViewCommand { get; }
         public ICommand DeleteCustomerCommand { get; }
+        public ICommand ResetCustomersListSearchCriteriaCommand { get; }
 
         #endregion Commands
 
         #region Constructors
 
-        public CustomersListViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public CustomersListViewModel(ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.customersListSearchCriteria = new CustomersListSearchCriteria();
-            this.SearchCustomersListCommand = new SearchCustomersListCommand(this, customersService);
-            this.ShowCreateCustomerViewCommand = new ShowCreateCustomerViewCommand(navigator, viewModelFactory);
-            this.ShowEditCustomerViewCommand = new ShowEditCustomerViewCommand(this, customersService, navigator, viewModelFactory);
-            this.ShowCustomerDetailsViewCommand = new ShowCustomerDetailsViewCommand(this, customersService, navigator, viewModelFactory);
-            this.DeleteCustomerCommand = new DeleteCustomerCommand(this, customersService);
+            this.SearchCustomersListCommand = new SearchCustomersListCommand(this, customersService, messageBoxService);
+            this.ShowCreateCustomerViewCommand = new ShowCreateCustomerViewCommand(navigator, viewModelFactory, messageBoxService);
+            this.ShowEditCustomerViewCommand = new ShowEditCustomerViewCommand(this, customersService, navigator, viewModelFactory, messageBoxService);
+            this.ShowCustomerDetailsViewCommand = new ShowCustomerDetailsViewCommand(this, customersService, navigator, viewModelFactory, messageBoxService);
+            this.DeleteCustomerCommand = new DeleteCustomerCommand(this, customersService, messageBoxService);
+            this.ResetCustomersListSearchCriteriaCommand = new ResetCustomersListSearchCriteriaCommand(this, customersService, messageBoxService);
         }
 
         #endregion Constructors

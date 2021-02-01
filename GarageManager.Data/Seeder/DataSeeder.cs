@@ -9,17 +9,17 @@ namespace GarageManager.Data.Seeder
 {
     public static class DataSeeder
     {
-        public static void Seed(this ModelBuilder modelBuilder)
+        public static void SeedData(this ModelBuilder modelBuilder)
         {
-            var passwordHasher = new PasswordHasher<User>();
-            var newUser = new User
+            PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            User user = new User
             {
                 UserId = 1,
                 UserName = "Admin",
             };
-            var hashedPassword = passwordHasher.HashPassword(newUser, "admin");
-            newUser.PasswordHash = hashedPassword;
-            modelBuilder.Entity<User>().HasData(newUser);
+            string hashedPassword = passwordHasher.HashPassword(user, "P@ssw0rd");
+            user.PasswordHash = hashedPassword;
+            modelBuilder.Entity<User>().HasData(user);
         }
     }
 }

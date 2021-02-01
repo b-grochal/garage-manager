@@ -12,8 +12,14 @@ namespace GarageManager.UI.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        #region Fields
+
         private string _userName;
         private string _password;
+
+        #endregion Fields
+
+        #region Properties
 
         public string UserName
         {
@@ -41,19 +47,33 @@ namespace GarageManager.UI.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; }
-
-        public MessageViewModel ErrorMessageViewModel { get; }
-
         public string ErrorMessage
         {
             set => ErrorMessageViewModel.Message = value;
         }
+
+        #endregion Properties
+
+        #region Commands
+
+        public ICommand LoginCommand { get; }
+
+        #endregion Commands
+
+        #region ViewModels
+
+        public MessageViewModel ErrorMessageViewModel { get; }
+
+        #endregion ViewModels
+
+        #region Constructors
 
         public LoginViewModel(IAuthService authService, IAuthenticator authenticator, INavigator navigator, IViewModelFactory viewModelFactory)
         {
             this.LoginCommand = new LoginCommand(this, authService, authenticator, navigator, viewModelFactory);
             this.ErrorMessageViewModel = new MessageViewModel();
         }
+
+        #endregion Constructors
     }
 }

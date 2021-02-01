@@ -1,4 +1,5 @@
 ﻿using GarageManager.Data.Entities;
+using GarageManager.Services.Exceptions;
 using GarageManager.Services.Interfaces;
 using GarageManager.UI.Infrastructure;
 using GarageManager.UI.State.Navigator;
@@ -17,21 +18,34 @@ namespace GarageManager.UI.Commands
         private readonly ICustomersService customersService;
         private readonly INavigator navigator;
         private readonly IViewModelFactory viewModelFactory;
+        private readonly IMessageBoxService messageBoxService;
 
-        public ShowEditCustomerViewCommand(CustomersListViewModel customersListViewModel ,ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory)
+        public ShowEditCustomerViewCommand(CustomersListViewModel customersListViewModel ,ICustomersService customersService, INavigator navigator, IViewModelFactory viewModelFactory, IMessageBoxService messageBoxService)
         {
             this.customersListViewModel = customersListViewModel;
             this.customersService = customersService;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
+            this.messageBoxService = messageBoxService;
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            Customer customer = await customersService.GetCustomer(customersListViewModel.SelectedCustomer.CustomerId);
-            EditCustomerViewModel editCustomerViewModel = (EditCustomerViewModel)viewModelFactory.CreateViewModel(ViewType.EditCustomer);
-            editCustomerViewModel.Customer = customer;
-            navigator.CurrentViewModel = editCustomerViewModel;
+            try
+            {
+                Customer customer = await customersService.GetCustomer(customersListViewModel.SelectedCustomer.CustomerId);
+                EditCustomerViewModel editCustomerViewModel = (EditCustomerViewModel)viewModelFactory.CreateViewModel(ViewType.EditCustomer);
+                editCustomerViewModel.Customer = customer;
+                navigator.CurrentViewModel = editCustomerViewModel;
+            }
+            catch (CustomerNotFoundException ex)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", $"Selected customer with ID: {ex.CustomerId} not found.");
+            }
+            catch (Exception)
+            {
+                messageBoxService.ShowErrorMessageBox("Error", "An unknown error occurred.");
+            }
         }
 
         public override bool CanExecute(object parameter)
